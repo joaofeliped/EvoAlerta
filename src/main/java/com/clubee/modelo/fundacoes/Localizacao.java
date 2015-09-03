@@ -6,13 +6,13 @@ import javax.persistence.Embeddable;
 @Embeddable
 public class Localizacao {
 	
-	@Column(length = 100)
+	@Column(length = 180)
 	private String pais;
 	
-	@Column(length = 100)
+	@Column(length = 180)
 	private String regiao;
 	
-	@Column(length = 150)
+	@Column(length = 180)
 	private String cidade;
 
 	public String getPais() {

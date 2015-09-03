@@ -20,7 +20,7 @@ import javax.persistence.TemporalType;
 import com.clubee.modelo.fundacoes.FND_PessoaVO;
 
 @Entity
-@Table(name = "AST_TipoEquipamento")
+@Table(name = "AST_Tipo_Equipamento")
 public class AST_TipoEquipamentoVO implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -37,6 +37,7 @@ public class AST_TipoEquipamentoVO implements Serializable {
 	private FND_PessoaVO criadoPor;
 
 	@Temporal(TemporalType.DATE)
+	@Column(name = "data_criacao")
 	private Date dataCriacao;
 
 	@ManyToOne

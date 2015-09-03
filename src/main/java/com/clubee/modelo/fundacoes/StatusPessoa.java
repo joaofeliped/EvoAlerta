@@ -1,13 +1,13 @@
 package com.clubee.modelo.fundacoes;
 
-public enum FND_StatusPessoaVO {
+public enum StatusPessoa {
 	
 	ATIVO("Ativo"),
 	INATIVO("Inativo");
 	
 	private String descricao;
 	
-	FND_StatusPessoaVO(String descricao) {
+	StatusPessoa(String descricao) {
 		this.descricao = descricao;
 	}
 	

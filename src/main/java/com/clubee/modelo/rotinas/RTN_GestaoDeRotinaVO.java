@@ -3,51 +3,83 @@ package com.clubee.modelo.rotinas;
 import java.io.Serializable;
 import java.util.Date;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+
+import com.clubee.modelo.ativos.AST_EquipamentoVO;
+import com.clubee.modelo.fundacoes.FND_Area;
+import com.clubee.modelo.fundacoes.FND_PessoaVO;
+import com.clubee.modelo.manutencoes.MNT_OcorrenciaVO;
 
 @Entity
-@Table(name = "RTN_GestaoDeRotinas")
+@Table(name = "RTN_Gestao_De_Rotinas")
 public class RTN_GestaoDeRotinaVO implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer RequestID;
+	private Integer requestID;
 
+	@Column(name = "nome_atividade", length = 180)
 	private String nomeAtividade;
+
+	@Column(columnDefinition = "text")
 	private String descricao;
 
-	//private FND_AreaVO areaResponsavel;
+	@ManyToOne
+	@JoinColumn(name = "area_responsavel_id")
+	private FND_Area areaResponsavel;
 
+	@Temporal(TemporalType.TIMESTAMP)
 	private Date dataCriacao;
+
+	@Temporal(TemporalType.TIMESTAMP)
 	private Date dataInicioRotina;
+
+	@Temporal(TemporalType.TIMESTAMP)
 	private Date dataFimRotina;
 
-	private String nomeResponsavel;
+	@ManyToOne
+	@JoinColumn(name = "responsavel_id")
+	private FND_PessoaVO responsavel;
 
+	@Column(name = "periodicidade_quantidade")
 	private Integer periodicidadeQuantidade;
+
+	@Column(name = "periodicidade_parametro", length = 180)
 	private String periodicidadeParametro;
 
-	// private Integer id_ativo;
-	// private String nome_ativo;
+	@ManyToOne
+	@JoinColumn(name = "equipamento_id")
+	private AST_EquipamentoVO equipamento;
 
-	// private Integer id_manutencao;
+	@ManyToOne
+	@JoinColumn(name = "criado_por")
+	private FND_PessoaVO criadoPor;
 
-	private String criadoPor;
+	@ManyToOne
+	@JoinColumn(name = "rotina_id")
+	private RTN_RotinaVO rotina;
 
-	private RTN_TipoDeRotinaVO tipoRotina;
+	@ManyToOne
+	@JoinColumn(name = "ocorrencia_id")
+	private MNT_OcorrenciaVO ocorrencia;
 
 	public Integer getRequestID() {
-		return RequestID;
+		return requestID;
 	}
 
 	public void setRequestID(Integer requestID) {
-		RequestID = requestID;
+		this.requestID = requestID;
 	}
 
 	public String getNomeAtividade() {
@@ -66,6 +98,13 @@ public class RTN_GestaoDeRotinaVO implements Serializable {
 		this.descricao = descricao;
 	}
 
+	public FND_Area getAreaResponsavel() {
+		return areaResponsavel;
+	}
+
+	public void setAreaResponsavel(FND_Area areaResponsavel) {
+		this.areaResponsavel = areaResponsavel;
+	}
 
 	public Date getDataCriacao() {
 		return dataCriacao;
@@ -91,12 +130,12 @@ public class RTN_GestaoDeRotinaVO implements Serializable {
 		this.dataFimRotina = dataFimRotina;
 	}
 
-	public String getNomeResponsavel() {
-		return nomeResponsavel;
+	public FND_PessoaVO getResponsavel() {
+		return responsavel;
 	}
 
-	public void setNomeResponsavel(String nomeResponsavel) {
-		this.nomeResponsavel = nomeResponsavel;
+	public void setResponsavel(FND_PessoaVO responsavel) {
+		this.responsavel = responsavel;
 	}
 
 	public Integer getPeriodicidadeQuantidade() {
@@ -115,28 +154,43 @@ public class RTN_GestaoDeRotinaVO implements Serializable {
 		this.periodicidadeParametro = periodicidadeParametro;
 	}
 
-	public String getCriadoPor() {
+	public AST_EquipamentoVO getEquipamento() {
+		return equipamento;
+	}
+
+	public void setEquipamento(AST_EquipamentoVO equipamento) {
+		this.equipamento = equipamento;
+	}
+
+	public FND_PessoaVO getCriadoPor() {
 		return criadoPor;
 	}
 
-	public void setCriadoPor(String criadoPor) {
+	public void setCriadoPor(FND_PessoaVO criadoPor) {
 		this.criadoPor = criadoPor;
 	}
 
-	public RTN_TipoDeRotinaVO getTipoRotina() {
-		return tipoRotina;
+	public RTN_RotinaVO getRotina() {
+		return rotina;
 	}
 
-	public void setTipoRotina(RTN_TipoDeRotinaVO tipoRotina) {
-		this.tipoRotina = tipoRotina;
+	public void setRotina(RTN_RotinaVO rotina) {
+		this.rotina = rotina;
+	}
+
+	public MNT_OcorrenciaVO getOcorrencia() {
+		return ocorrencia;
+	}
+
+	public void setOcorrencia(MNT_OcorrenciaVO ocorrencia) {
+		this.ocorrencia = ocorrencia;
 	}
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result
-				+ ((RequestID == null) ? 0 : RequestID.hashCode());
+		result = prime * result + ((requestID == null) ? 0 : requestID.hashCode());
 		return result;
 	}
 
@@ -149,10 +203,10 @@ public class RTN_GestaoDeRotinaVO implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		RTN_GestaoDeRotinaVO other = (RTN_GestaoDeRotinaVO) obj;
-		if (RequestID == null) {
-			if (other.RequestID != null)
+		if (requestID == null) {
+			if (other.requestID != null)
 				return false;
-		} else if (!RequestID.equals(other.RequestID))
+		} else if (!requestID.equals(other.requestID))
 			return false;
 		return true;
 	}

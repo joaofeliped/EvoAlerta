@@ -12,7 +12,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="AST_Modelo")
+@Table(name="AST_Modelos")
 public class AST_ModeloVO implements Serializable {
 
 	private static final long serialVersionUID = 1L;

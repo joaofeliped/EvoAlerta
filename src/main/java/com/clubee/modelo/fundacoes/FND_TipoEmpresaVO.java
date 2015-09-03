@@ -13,7 +13,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "FND_TipoEmpresa")
+@Table(name = "FND_Tipo_Empresa")
 public class FND_TipoEmpresaVO implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -22,7 +22,7 @@ public class FND_TipoEmpresaVO implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer requestID;
 	
-	@Column(length = 150)
+	@Column(length = 180)
 	private String descricao;
 
 	@ManyToMany(mappedBy = "tiposEmpresa")

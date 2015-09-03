@@ -28,7 +28,7 @@ public class FND_EmpresaVO implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer requestID;
 
-	@Column(name = "nome_empresa", length = 150)
+	@Column(name = "nome_empresa", length = 180)
 	private String nomeEmpresa;
 
 	@Column(length = 20)
@@ -37,6 +37,7 @@ public class FND_EmpresaVO implements Serializable {
 	@Column(length = 100, unique = true)
 	private String email;
 
+	@Column(length = 20)
 	private String password;
 
 	@Embedded
@@ -54,14 +55,16 @@ public class FND_EmpresaVO implements Serializable {
 
 	@OneToMany(mappedBy = "empresa")
 	private List<FND_CategoriaOperacionalVO> categoriasOperacionais = new ArrayList<>();
-	
+
 	@ManyToMany
-	@JoinTable(name = "relacao_empresa_area", joinColumns = @JoinColumn(name = "empresa_id"),
-			inverseJoinColumns = @JoinColumn(name = "area_id"))
+	@JoinTable(name = "relacao_empresa_area", joinColumns = @JoinColumn(name = "empresa_id") , inverseJoinColumns = @JoinColumn(name = "area_id") )
 	private List<FND_Area> areas = new ArrayList<>();
-	
+
 	@OneToMany(mappedBy = "empresa")
 	private List<MNT_OcorrenciaVO> ocorrencias = new ArrayList<>();
+
+	@OneToMany(mappedBy = "empresa")
+	private List<FND_Designacao> designacoes = new ArrayList<>();
 
 	public Integer getRequestID() {
 		return requestID;
@@ -142,13 +145,29 @@ public class FND_EmpresaVO implements Serializable {
 	public void setCategoriasOperacionais(List<FND_CategoriaOperacionalVO> categoriasOperacionais) {
 		this.categoriasOperacionais = categoriasOperacionais;
 	}
-	
+
 	public List<FND_Area> getAreas() {
 		return areas;
 	}
 
 	public void setAreas(List<FND_Area> areas) {
 		this.areas = areas;
+	}
+
+	public List<MNT_OcorrenciaVO> getOcorrencias() {
+		return ocorrencias;
+	}
+
+	public void setOcorrencias(List<MNT_OcorrenciaVO> ocorrencias) {
+		this.ocorrencias = ocorrencias;
+	}
+
+	public List<FND_Designacao> getDesignacoes() {
+		return designacoes;
+	}
+
+	public void setDesignacoes(List<FND_Designacao> designacoes) {
+		this.designacoes = designacoes;
 	}
 
 	@Override

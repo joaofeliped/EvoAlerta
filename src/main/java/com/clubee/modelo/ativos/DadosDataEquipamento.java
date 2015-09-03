@@ -2,76 +2,84 @@ package com.clubee.modelo.ativos;
 
 import java.util.Date;
 
+import javax.persistence.Column;
 import javax.persistence.Embeddable;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 @Embeddable
 public class DadosDataEquipamento {
-	
-	@Temporal(TemporalType.DATE)
-	private Date dataDeCriacao;
-	
-	@Temporal(TemporalType.DATE)
-	private Date dataDeCompra;
-	
+
 	@Temporal(TemporalType.TIMESTAMP)
-	private Date dataDeInstalacao;
-	
+	@Column(name = "data_criacao")
+	private Date dataCriacao;
+
 	@Temporal(TemporalType.DATE)
-	private Date dataDaUltimaManutencao;
-	
+	@Column(name = "data_compra")
+	private Date dataCompra;
+
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name = "data_instalacao")
+	private Date dataInstalacao;
+
 	@Temporal(TemporalType.DATE)
-	private Date dataDaProximaManutencao;
-	
+	@Column(name = "data_ultima_manutencao")
+	private Date dataUltimaManutencao;
+
 	@Temporal(TemporalType.DATE)
-	private Date dataDeDesligamento;
+	@Column(name = "data_proxima_manutencao")
+	private Date dataProximaManutencao;
 
-	public Date getDataDeCriacao() {
-		return dataDeCriacao;
+	@Temporal(TemporalType.DATE)
+	@Column(name = "data_desligamento")
+	private Date dataDesligamento;
+
+	public Date getDataCriacao() {
+		return dataCriacao;
 	}
 
-	public void setDataDeCriacao(Date dataDeCriacao) {
-		this.dataDeCriacao = dataDeCriacao;
+	public void setDataCriacao(Date dataCriacao) {
+		this.dataCriacao = dataCriacao;
 	}
 
-	public Date getDataDeCompra() {
-		return dataDeCompra;
+	public Date getDataCompra() {
+		return dataCompra;
 	}
 
-	public void setDataDeCompra(Date dataDeCompra) {
-		this.dataDeCompra = dataDeCompra;
+	public void setDataCompra(Date dataCompra) {
+		this.dataCompra = dataCompra;
 	}
 
-	public Date getDataDeInstalacao() {
-		return dataDeInstalacao;
+	public Date getDataInstalacao() {
+		return dataInstalacao;
 	}
 
-	public void setDataDeInstalacao(Date dataDeInstalacao) {
-		this.dataDeInstalacao = dataDeInstalacao;
+	public void setDataInstalacao(Date dataInstalacao) {
+		this.dataInstalacao = dataInstalacao;
 	}
 
-	public Date getDataDaUltimaManutencao() {
-		return dataDaUltimaManutencao;
+	public Date getDataUltimaManutencao() {
+		return dataUltimaManutencao;
 	}
 
-	public void setDataDaUltimaManutencao(Date dataDaUltimaManutencao) {
-		this.dataDaUltimaManutencao = dataDaUltimaManutencao;
+	public void setDataUltimaManutencao(Date dataUltimaManutencao) {
+		this.dataUltimaManutencao = dataUltimaManutencao;
 	}
 
-	public Date getDataDaProximaManutencao() {
-		return dataDaProximaManutencao;
+	public Date getDataProximaManutencao() {
+		return dataProximaManutencao;
 	}
 
-	public void setDataDaProximaManutencao(Date dataDaProximaManutencao) {
-		this.dataDaProximaManutencao = dataDaProximaManutencao;
+	public void setDataProximaManutencao(Date dataProximaManutencao) {
+		this.dataProximaManutencao = dataProximaManutencao;
 	}
 
-	public Date getDataDeDesligamento() {
-		return dataDeDesligamento;
+	public Date getDataDesligamento() {
+		return dataDesligamento;
 	}
 
-	public void setDataDeDesligamento(Date dataDeDesligamento) {
-		this.dataDeDesligamento = dataDeDesligamento;
+	public void setDataDesligamento(Date dataDesligamento) {
+		this.dataDesligamento = dataDesligamento;
 	}
+
 }

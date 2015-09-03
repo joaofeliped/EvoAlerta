@@ -1,12 +1,13 @@
-package com.clubee.modelo.ativos;
+package com.clubee.modelo.rotinas;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -17,34 +18,38 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import com.clubee.modelo.fundacoes.FND_Designacao;
 import com.clubee.modelo.fundacoes.FND_PessoaVO;
 
 @Entity
-@Table(name = "AST_Categoria_Equipamento")
-public class AST_CategoriaEquipamentoVO implements Serializable {
+@Table(name = "RTN_Rotinas")
+public class RTN_RotinaVO implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer requestID;
-	
-	@Column(length = 180)
-	private String nome;
 
-	@Temporal(TemporalType.DATE)
-	@Column(name = "data_criacao")
-	private Date dataCriacao;
+	@Enumerated(EnumType.STRING)
+	private TipoRotina tipo;
+
+	@Enumerated(EnumType.STRING)
+	private StatusRotina status;
 
 	@ManyToOne
 	@JoinColumn(name = "criado_por")
 	private FND_PessoaVO criadoPor;
 
-	@OneToMany(mappedBy = "categoriaEquipamento")
-	private List<AST_TipoEquipamentoVO> tiposEquipamentos = new ArrayList<>();
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date dataCriacao;
 
-	@OneToMany(mappedBy = "categoria")
-	private List<AST_EquipamentoVO> equipamentos = new ArrayList<>();
+	@ManyToOne
+	@JoinColumn(name = "designacao_id")
+	private FND_Designacao designacao;
+
+	@OneToMany(mappedBy = "rotina")
+	private List<RTN_GestaoDeRotinaVO> gestoesDeRotinas = new ArrayList<>();
 
 	public Integer getRequestID() {
 		return requestID;
@@ -54,20 +59,20 @@ public class AST_CategoriaEquipamentoVO implements Serializable {
 		this.requestID = requestID;
 	}
 
-	public String getNome() {
-		return nome;
+	public TipoRotina getTipo() {
+		return tipo;
 	}
 
-	public void setNome(String nome) {
-		this.nome = nome;
+	public void setTipo(TipoRotina tipo) {
+		this.tipo = tipo;
 	}
 
-	public Date getDataCriacao() {
-		return dataCriacao;
+	public StatusRotina getStatus() {
+		return status;
 	}
 
-	public void setDataCriacao(Date dataCriacao) {
-		this.dataCriacao = dataCriacao;
+	public void setStatus(StatusRotina status) {
+		this.status = status;
 	}
 
 	public FND_PessoaVO getCriadoPor() {
@@ -78,20 +83,28 @@ public class AST_CategoriaEquipamentoVO implements Serializable {
 		this.criadoPor = criadoPor;
 	}
 
-	public List<AST_TipoEquipamentoVO> getTiposEquipamentos() {
-		return tiposEquipamentos;
+	public Date getDataCriacao() {
+		return dataCriacao;
 	}
 
-	public void setTiposEquipamentos(List<AST_TipoEquipamentoVO> tiposEquipamentos) {
-		this.tiposEquipamentos = tiposEquipamentos;
+	public void setDataCriacao(Date dataCriacao) {
+		this.dataCriacao = dataCriacao;
 	}
 
-	public List<AST_EquipamentoVO> getEquipamentos() {
-		return equipamentos;
+	public FND_Designacao getDesignacao() {
+		return designacao;
 	}
 
-	public void setEquipamentos(List<AST_EquipamentoVO> equipamentos) {
-		this.equipamentos = equipamentos;
+	public void setDesignacao(FND_Designacao designacao) {
+		this.designacao = designacao;
+	}
+
+	public List<RTN_GestaoDeRotinaVO> getGestoesDeRotinas() {
+		return gestoesDeRotinas;
+	}
+
+	public void setGestoesDeRotinas(List<RTN_GestaoDeRotinaVO> gestoesDeRotinas) {
+		this.gestoesDeRotinas = gestoesDeRotinas;
 	}
 
 	@Override
@@ -110,7 +123,7 @@ public class AST_CategoriaEquipamentoVO implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		AST_CategoriaEquipamentoVO other = (AST_CategoriaEquipamentoVO) obj;
+		RTN_RotinaVO other = (RTN_RotinaVO) obj;
 		if (requestID == null) {
 			if (other.requestID != null)
 				return false;
@@ -118,4 +131,5 @@ public class AST_CategoriaEquipamentoVO implements Serializable {
 			return false;
 		return true;
 	}
+
 }

@@ -24,10 +24,11 @@ import com.clubee.modelo.ativos.AST_EquipamentoVO;
 import com.clubee.modelo.fundacoes.FND_Area;
 import com.clubee.modelo.fundacoes.FND_EmpresaVO;
 import com.clubee.modelo.fundacoes.FND_PessoaVO;
+import com.clubee.modelo.rotinas.RTN_GestaoDeRotinaVO;
 import com.clubee.modelo.sistema.SYS_Anexo;
 
 @Entity
-@Table(name = "MNT_Ocorrencia")
+@Table(name = "MNT_Ocorrencias")
 public class MNT_OcorrenciaVO implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -39,20 +40,20 @@ public class MNT_OcorrenciaVO implements Serializable {
 	@Column(length = 180)
 	private String sumario;
 
-	@Column(columnDefinition = "text")
+	@Column(name = "descricao_detalhada", columnDefinition = "text")
 	private String descricaoDetalhada;
 
 	@ManyToOne
 	@JoinColumn(name = "solicitante_id")
 	private FND_PessoaVO solicitante;
 
-	@Column(length = 180)
+	@Column(name = "categoria_1", length = 180)
 	private String categoria1;
 
-	@Column(length = 180)
+	@Column(name = "categoria_2", length = 180)
 	private String categoria2;
 
-	@Column(length = 180)
+	@Column(name = "categoria_3", length = 180)
 	private String categoria3;
 
 	@ManyToOne
@@ -60,7 +61,7 @@ public class MNT_OcorrenciaVO implements Serializable {
 	private FND_EmpresaVO empresa;
 
 	@ManyToOne
-	@JoinColumn(name = "area_designada")
+	@JoinColumn(name = "area_designada_id")
 	private FND_Area areaDesignada;
 
 	@ManyToOne
@@ -68,12 +69,15 @@ public class MNT_OcorrenciaVO implements Serializable {
 	private FND_PessoaVO atendidoPor;
 
 	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name = "data_abertura")
 	private Date dataAbertura;
 
 	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name = "data_esperada")
 	private Date dataEsperada;
 
 	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name = "data_conclusao")
 	private Date dataConclusao;
 
 	@Enumerated(EnumType.STRING)
@@ -82,7 +86,7 @@ public class MNT_OcorrenciaVO implements Serializable {
 	@Temporal(TemporalType.DATE)
 	private Date reminder;
 
-	@Column(columnDefinition = "text")
+	@Column(name = "reminder_descricao", columnDefinition = "text")
 	private String reminderDescricao;
 
 	@OneToOne
@@ -92,7 +96,7 @@ public class MNT_OcorrenciaVO implements Serializable {
 	@Column(columnDefinition = "text")
 	private String conclusao;
 
-	@Column(length = 180)
+	@Column(name = "causa_raiz", length = 180)
 	private String causaRaiz;
 
 	@ManyToOne
@@ -105,6 +109,9 @@ public class MNT_OcorrenciaVO implements Serializable {
 
 	@OneToMany(mappedBy = "ocorrencia")
 	private List<MNT_TarefaVO> tarefas = new ArrayList<>();
+
+	@OneToMany(mappedBy = "ocorrencia")
+	private List<RTN_GestaoDeRotinaVO> gestoesDeRotinas = new ArrayList<>();
 
 	public Integer getRequestID() {
 		return requestID;
@@ -280,6 +287,14 @@ public class MNT_OcorrenciaVO implements Serializable {
 
 	public void setTarefas(List<MNT_TarefaVO> tarefas) {
 		this.tarefas = tarefas;
+	}
+
+	public List<RTN_GestaoDeRotinaVO> getGestoesDeRotinas() {
+		return gestoesDeRotinas;
+	}
+
+	public void setGestoesDeRotinas(List<RTN_GestaoDeRotinaVO> gestoesDeRotinas) {
+		this.gestoesDeRotinas = gestoesDeRotinas;
 	}
 
 	@Override

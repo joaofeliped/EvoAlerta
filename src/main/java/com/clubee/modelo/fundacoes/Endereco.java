@@ -9,16 +9,16 @@ public class Endereco {
 	@Column(length = 12)
 	private String cep;
 	
-	@Column(length = 150)
+	@Column(length = 180)
 	private String logradouro;
 	
-	@Column(name = "complemento_1", length = 150 )
+	@Column(name = "complemento_1", length = 180 )
 	private String complemento1;
 	
-	@Column(name = "complemento_2", length = 150)
+	@Column(name = "complemento_2", length = 180)
 	private String complemento2;
 	
-	@Column(length = 100)
+	@Column(length = 180)
 	private String bairro;
 
 	public String getCep() {
