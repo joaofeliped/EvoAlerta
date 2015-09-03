@@ -25,6 +25,8 @@ import javax.persistence.TemporalType;
 
 import com.clubee.modelo.manutencoes.MNT_OcorrenciaVO;
 import com.clubee.modelo.manutencoes.MNT_TarefaVO;
+import com.clubee.modelo.rotinas.RTN_GestaoDeRotinaVO;
+import com.clubee.modelo.rotinas.RTN_RotinaVO;
 
 @Entity
 @Table(name = "FND_Pessoas")
@@ -36,7 +38,7 @@ public class FND_PessoaVO implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer requestID;
 
-	@Column(name = "nome_completo", length = 100)
+	@Column(name = "nome_completo", length = 180)
 	private String nomeCompleto;
 
 	@Column(length = 80)
@@ -57,7 +59,7 @@ public class FND_PessoaVO implements Serializable {
 	@Column(length = 80, unique = true)
 	private String email;
 
-	@Column(length = 150)
+	@Column(length = 20)
 	private String password;
 
 	@Enumerated(EnumType.STRING)
@@ -99,6 +101,12 @@ public class FND_PessoaVO implements Serializable {
 
 	@OneToMany(mappedBy = "abertoPor")
 	private List<MNT_TarefaVO> tarefas = new ArrayList<>();
+
+	@OneToMany(mappedBy = "criadoPor")
+	private List<RTN_RotinaVO> rotinas = new ArrayList<>();
+
+	@OneToMany(mappedBy = "criadoPor")
+	private List<RTN_GestaoDeRotinaVO> gestoesDeRotinas = new ArrayList<>();
 
 	public Integer getRequestID() {
 		return requestID;
@@ -258,6 +266,22 @@ public class FND_PessoaVO implements Serializable {
 
 	public void setTarefas(List<MNT_TarefaVO> tarefas) {
 		this.tarefas = tarefas;
+	}
+
+	public List<RTN_RotinaVO> getRotinas() {
+		return rotinas;
+	}
+
+	public void setRotinas(List<RTN_RotinaVO> rotinas) {
+		this.rotinas = rotinas;
+	}
+
+	public List<RTN_GestaoDeRotinaVO> getGestoesDeRotinas() {
+		return gestoesDeRotinas;
+	}
+
+	public void setGestoesDeRotinas(List<RTN_GestaoDeRotinaVO> gestoesDeRotinas) {
+		this.gestoesDeRotinas = gestoesDeRotinas;
 	}
 
 	@Override

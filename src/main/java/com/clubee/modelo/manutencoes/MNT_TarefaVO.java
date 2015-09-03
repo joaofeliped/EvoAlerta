@@ -39,12 +39,15 @@ public class MNT_TarefaVO implements Serializable {
 	private String descricao;
 
 	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name = "data_execucao")
 	private Date dataExecucao;
 
 	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name = "data_conclusao")
 	private Date dataConclusao;
 
 	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name = "data_abertura")
 	private Date dataAbertura;
 
 	@ManyToOne

@@ -17,7 +17,7 @@ import javax.persistence.Table;
 import com.clubee.modelo.sistema.SYS_Modulo;
 
 @Entity
-@Table(name = "FND_Perfil")
+@Table(name = "FND_Perfils")
 public class FND_PerfilVO implements Serializable {
 
 	private static final long serialVersionUID = 1L;

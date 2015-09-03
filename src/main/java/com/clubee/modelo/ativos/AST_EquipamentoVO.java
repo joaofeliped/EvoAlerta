@@ -1,6 +1,8 @@
 package com.clubee.modelo.ativos;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Embedded;
@@ -11,11 +13,15 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import com.clubee.modelo.fundacoes.FND_Area;
+import com.clubee.modelo.manutencoes.MNT_OcorrenciaVO;
+import com.clubee.modelo.rotinas.RTN_GestaoDeRotinaVO;
+import com.clubee.modelo.sistema.SYS_Anexo;
 
 @Entity
 @Table(name = "AST_Equipamentos")
@@ -31,10 +37,9 @@ public class AST_EquipamentoVO implements Serializable {
 	private String nome;
 
 	@Enumerated(EnumType.STRING)
-	@Column(length = 30)
 	private StatusEquipamento status;
 
-	@Column(length = 180)
+	@Column(name = "codigo_equipamento", length = 180)
 	private String codigoEquipamento;
 
 	@ManyToOne
@@ -61,19 +66,27 @@ public class AST_EquipamentoVO implements Serializable {
 	@JoinColumn(name = "fabricante_id")
 	private AST_FabricanteVO fabricante;
 
-	@Column(length = 180)
+	@Column(name = "numero_de_serie", length = 180)
 	private String numeroDeSerie;
 
-	@Lob
-	private byte[] imagem;
+	@OneToOne
+	@JoinColumn(name = "anexo_id")
+	private SYS_Anexo anexo;
 
 	@Embedded
 	private DadosDataEquipamento dadosDeDatas = new DadosDataEquipamento();
 
+	@Column(name = "periodicidade_quantidade")
 	private Integer periodicidadeQuantidade;
 
-	@Column(length = 180)
+	@Column(name = "periodicidade_parametro", length = 180)
 	private String periodicidadeParametro;
+
+	@OneToMany(mappedBy = "equipamento")
+	private List<MNT_OcorrenciaVO> ocorrencias = new ArrayList<>();
+
+	@OneToMany(mappedBy = "equipamento")
+	private List<RTN_GestaoDeRotinaVO> gestoesDeRotinas = new ArrayList<>();
 
 	public Integer getRequestID() {
 		return requestID;
@@ -155,12 +168,12 @@ public class AST_EquipamentoVO implements Serializable {
 		this.numeroDeSerie = numeroDeSerie;
 	}
 
-	public byte[] getImagem() {
-		return imagem;
+	public SYS_Anexo getAnexo() {
+		return anexo;
 	}
 
-	public void setImagem(byte[] imagem) {
-		this.imagem = imagem;
+	public void setAnexo(SYS_Anexo anexo) {
+		this.anexo = anexo;
 	}
 
 	public DadosDataEquipamento getDadosDeDatas() {
@@ -193,6 +206,22 @@ public class AST_EquipamentoVO implements Serializable {
 
 	public void setArea(FND_Area area) {
 		this.area = area;
+	}
+
+	public List<MNT_OcorrenciaVO> getOcorrencias() {
+		return ocorrencias;
+	}
+
+	public void setOcorrencias(List<MNT_OcorrenciaVO> ocorrencias) {
+		this.ocorrencias = ocorrencias;
+	}
+
+	public List<RTN_GestaoDeRotinaVO> getGestoesDeRotinas() {
+		return gestoesDeRotinas;
+	}
+
+	public void setGestoesDeRotinas(List<RTN_GestaoDeRotinaVO> gestoesDeRotinas) {
+		this.gestoesDeRotinas = gestoesDeRotinas;
 	}
 
 	@Override

@@ -26,7 +26,7 @@ public class FND_Area implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer requestID;
 
-	@Column(length = 150)
+	@Column(length = 180)
 	private String nome;
 
 	@ManyToMany(mappedBy = "areas")
@@ -40,6 +40,9 @@ public class FND_Area implements Serializable {
 
 	@OneToMany(mappedBy = "areaDesignada")
 	private List<MNT_TarefaVO> tarefas = new ArrayList<>();
+
+	@OneToMany(mappedBy = "area")
+	private List<FND_Designacao> designacoes = new ArrayList<>();
 
 	public Integer getRequestID() {
 		return requestID;
@@ -87,6 +90,14 @@ public class FND_Area implements Serializable {
 
 	public void setTarefas(List<MNT_TarefaVO> tarefas) {
 		this.tarefas = tarefas;
+	}
+
+	public List<FND_Designacao> getDesignacoes() {
+		return designacoes;
+	}
+
+	public void setDesignacoes(List<FND_Designacao> designacoes) {
+		this.designacoes = designacoes;
 	}
 
 	@Override

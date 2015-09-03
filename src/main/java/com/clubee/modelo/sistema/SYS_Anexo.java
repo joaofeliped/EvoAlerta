@@ -2,6 +2,7 @@ package com.clubee.modelo.sistema;
 
 import java.io.Serializable;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -25,15 +26,19 @@ public class SYS_Anexo implements Serializable {
 	private Integer requestID;
 
 	@Lob
+	@Column(name = "anexo_1")
 	private byte[] anexo1;
 
 	@Lob
+	@Column(name = "anexo_2")
 	private byte[] anexo2;
 
 	@Lob
+	@Column(name = "anexo_3")
 	private byte[] anexo3;
 
 	@Lob
+	@Column(name = "anexo_4")
 	private byte[] anexo4;
 
 	@OneToOne
