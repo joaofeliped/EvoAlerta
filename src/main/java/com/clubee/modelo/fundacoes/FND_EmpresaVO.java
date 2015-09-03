@@ -16,6 +16,8 @@ import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.clubee.modelo.manutencoes.MNT_OcorrenciaVO;
+
 @Entity
 @Table(name = "FND_Empresas")
 public class FND_EmpresaVO implements Serializable {
@@ -57,6 +59,9 @@ public class FND_EmpresaVO implements Serializable {
 	@JoinTable(name = "relacao_empresa_area", joinColumns = @JoinColumn(name = "empresa_id"),
 			inverseJoinColumns = @JoinColumn(name = "area_id"))
 	private List<FND_Area> areas = new ArrayList<>();
+	
+	@OneToMany(mappedBy = "empresa")
+	private List<MNT_OcorrenciaVO> ocorrencias = new ArrayList<>();
 
 	public Integer getRequestID() {
 		return requestID;

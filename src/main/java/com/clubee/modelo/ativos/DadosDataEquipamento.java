@@ -3,15 +3,28 @@ package com.clubee.modelo.ativos;
 import java.util.Date;
 
 import javax.persistence.Embeddable;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 @Embeddable
-public class AST_DadosDataEquipamento {
-
+public class DadosDataEquipamento {
+	
+	@Temporal(TemporalType.DATE)
 	private Date dataDeCriacao;
+	
+	@Temporal(TemporalType.DATE)
 	private Date dataDeCompra;
+	
+	@Temporal(TemporalType.TIMESTAMP)
 	private Date dataDeInstalacao;
+	
+	@Temporal(TemporalType.DATE)
 	private Date dataDaUltimaManutencao;
+	
+	@Temporal(TemporalType.DATE)
 	private Date dataDaProximaManutencao;
+	
+	@Temporal(TemporalType.DATE)
 	private Date dataDeDesligamento;
 
 	public Date getDataDeCriacao() {

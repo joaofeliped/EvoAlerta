@@ -1,6 +1,8 @@
-package com.clubee.modelo.ativos;
+package com.clubee.modelo.sistema;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -8,36 +10,31 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
+import com.clubee.modelo.fundacoes.FND_PerfilVO;
+
 @Entity
-@Table(name="AST_Modelo")
-public class AST_ModeloVO implements Serializable {
+@Table(name = "SYS_Modulo")
+public class SYS_Modulo implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-	
+
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer requestID;
-	
+
 	@Column(length = 180)
-	private String nome;
-	
-	@Column(columnDefinition = "text")
 	private String descricao;
-	
-	@ManyToOne
-	@JoinColumn(name = "marca_id")
-	private AST_MarcaVO marca;
-	
-	@ManyToOne
-	@JoinColumn(name = "modelo_id")
-	private AST_ModeloVO modelo;
-	
-	@ManyToOne
-	@JoinColumn(name = "fabricante_id")
-	private AST_FabricanteVO fabricante;
+
+	@Column(length = 180)
+	private String modulo;
+
+	@ManyToMany
+	@JoinTable(name = "permissoes", joinColumns = @JoinColumn(name = "modulo_id") , inverseJoinColumns = @JoinColumn(name = "perfil_id") )
+	private List<FND_PerfilVO> perfis = new ArrayList<>();
 
 	public Integer getRequestID() {
 		return requestID;
@@ -45,14 +42,6 @@ public class AST_ModeloVO implements Serializable {
 
 	public void setRequestID(Integer requestID) {
 		this.requestID = requestID;
-	}
-
-	public String getNome() {
-		return nome;
-	}
-
-	public void setNome(String nome) {
-		this.nome = nome;
 	}
 
 	public String getDescricao() {
@@ -63,36 +52,27 @@ public class AST_ModeloVO implements Serializable {
 		this.descricao = descricao;
 	}
 
-	public AST_MarcaVO getMarca() {
-		return marca;
+	public String getModulo() {
+		return modulo;
 	}
 
-	public void setMarca(AST_MarcaVO marca) {
-		this.marca = marca;
+	public void setModulo(String modulo) {
+		this.modulo = modulo;
 	}
 
-	public AST_ModeloVO getModelo() {
-		return modelo;
+	public List<FND_PerfilVO> getPerfis() {
+		return perfis;
 	}
 
-	public void setModelo(AST_ModeloVO modelo) {
-		this.modelo = modelo;
-	}
-
-	public AST_FabricanteVO getFabricante() {
-		return fabricante;
-	}
-
-	public void setFabricante(AST_FabricanteVO fabricante) {
-		this.fabricante = fabricante;
+	public void setPerfis(List<FND_PerfilVO> perfis) {
+		this.perfis = perfis;
 	}
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result
-				+ ((requestID == null) ? 0 : requestID.hashCode());
+		result = prime * result + ((requestID == null) ? 0 : requestID.hashCode());
 		return result;
 	}
 
@@ -104,7 +84,7 @@ public class AST_ModeloVO implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		AST_ModeloVO other = (AST_ModeloVO) obj;
+		SYS_Modulo other = (SYS_Modulo) obj;
 		if (requestID == null) {
 			if (other.requestID != null)
 				return false;
@@ -112,4 +92,5 @@ public class AST_ModeloVO implements Serializable {
 			return false;
 		return true;
 	}
+
 }

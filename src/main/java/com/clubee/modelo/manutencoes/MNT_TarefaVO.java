@@ -3,11 +3,21 @@ package com.clubee.modelo.manutencoes;
 import java.io.Serializable;
 import java.util.Date;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+
+import com.clubee.modelo.fundacoes.FND_Area;
+import com.clubee.modelo.fundacoes.FND_PessoaVO;
 
 @Entity
 @Table(name = "MNT_Tarefas")
@@ -19,19 +29,38 @@ public class MNT_TarefaVO implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer requestID;
 
+	@Column(length = 180)
 	private String nome;
+
+	@Column(columnDefinition = "text")
 	private String sumario;
+
+	@Column(columnDefinition = "text")
 	private String descricao;
 
+	@Temporal(TemporalType.TIMESTAMP)
 	private Date dataExecucao;
+
+	@Temporal(TemporalType.TIMESTAMP)
 	private Date dataConclusao;
+
+	@Temporal(TemporalType.TIMESTAMP)
 	private Date dataAbertura;
 
-	private String abertoPor;
+	@ManyToOne
+	@JoinColumn(name = "aberto_por")
+	private FND_PessoaVO abertoPor;
 
-	// private FND_AreaVO areaDesignada;
+	@ManyToOne
+	@JoinColumn(name = "area_designada")
+	private FND_Area areaDesignada;
 
-	private MNT_GestaoDeManutencaoVO manutencao;
+	@ManyToOne
+	@JoinColumn(name = "ocorrencia")
+	private MNT_OcorrenciaVO ocorrencia;
+
+	@Enumerated(EnumType.STRING)
+	private StatusTarefa status;
 
 	public Integer getRequestID() {
 		return requestID;
@@ -89,20 +118,36 @@ public class MNT_TarefaVO implements Serializable {
 		this.dataAbertura = dataAbertura;
 	}
 
-	public String getAbertoPor() {
+	public FND_PessoaVO getAbertoPor() {
 		return abertoPor;
 	}
 
-	public void setAbertoPor(String abertoPor) {
+	public void setAbertoPor(FND_PessoaVO abertoPor) {
 		this.abertoPor = abertoPor;
 	}
 
-	public MNT_GestaoDeManutencaoVO getManutencao() {
-		return manutencao;
+	public FND_Area getAreaDesignada() {
+		return areaDesignada;
 	}
 
-	public void setManutencao(MNT_GestaoDeManutencaoVO manutencao) {
-		this.manutencao = manutencao;
+	public void setAreaDesignada(FND_Area areaDesignada) {
+		this.areaDesignada = areaDesignada;
+	}
+
+	public MNT_OcorrenciaVO getOcorrencia() {
+		return ocorrencia;
+	}
+
+	public void setOcorrencia(MNT_OcorrenciaVO ocorrencia) {
+		this.ocorrencia = ocorrencia;
+	}
+
+	public StatusTarefa getStatus() {
+		return status;
+	}
+
+	public void setStatus(StatusTarefa status) {
+		this.status = status;
 	}
 
 	@Override

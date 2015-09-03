@@ -10,26 +10,36 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import com.clubee.modelo.manutencoes.MNT_OcorrenciaVO;
+import com.clubee.modelo.manutencoes.MNT_TarefaVO;
 
 @Entity
 @Table(name = "FND_Areas")
 public class FND_Area implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer requestID;
-	
+
 	@Column(length = 150)
 	private String nome;
-	
+
 	@ManyToMany(mappedBy = "areas")
 	private List<FND_PessoaVO> pessoas = new ArrayList<>();
-	
+
 	@ManyToMany(mappedBy = "areas")
 	private List<FND_EmpresaVO> empresas = new ArrayList<>();
+
+	@OneToMany(mappedBy = "areaDesignada")
+	private List<MNT_OcorrenciaVO> ocorrencias = new ArrayList<>();
+
+	@OneToMany(mappedBy = "areaDesignada")
+	private List<MNT_TarefaVO> tarefas = new ArrayList<>();
 
 	public Integer getRequestID() {
 		return requestID;
@@ -46,7 +56,7 @@ public class FND_Area implements Serializable {
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-	
+
 	public List<FND_PessoaVO> getPessoas() {
 		return pessoas;
 	}
@@ -61,6 +71,22 @@ public class FND_Area implements Serializable {
 
 	public void setEmpresas(List<FND_EmpresaVO> empresas) {
 		this.empresas = empresas;
+	}
+
+	public List<MNT_OcorrenciaVO> getOcorrencias() {
+		return ocorrencias;
+	}
+
+	public void setOcorrencias(List<MNT_OcorrenciaVO> ocorrencias) {
+		this.ocorrencias = ocorrencias;
+	}
+
+	public List<MNT_TarefaVO> getTarefas() {
+		return tarefas;
+	}
+
+	public void setTarefas(List<MNT_TarefaVO> tarefas) {
+		this.tarefas = tarefas;
 	}
 
 	@Override

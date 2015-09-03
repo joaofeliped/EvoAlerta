@@ -5,37 +5,48 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import com.clubee.modelo.fundacoes.FND_PessoaVO;
+
 @Entity
-@Table(name="AST_Fabricante")
+@Table(name = "AST_Fabricante")
 public class AST_FabricanteVO implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-	
+
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer requestID;
+
+	@Column(length = 180)
 	private String nome;
-	
-	@Temporal(TemporalType.TIMESTAMP)
+
+	@Temporal(TemporalType.DATE)
 	private Date dataDeCriacao;
-	
-	private String criadoPor;
-	
-	private AST_MarcaVO marca;
-	
-	private AST_ModeloVO modelo;
-	
-	@OneToMany
+
+	@ManyToOne
+	@JoinColumn(name = "criado_por")
+	private FND_PessoaVO criadoPor;
+
+	@OneToMany(mappedBy = "fabricante")
 	private List<AST_EquipamentoVO> equipamentos = new ArrayList<>();
+
+	@OneToMany(mappedBy = "fabricante")
+	private List<AST_ModeloVO> modelos = new ArrayList<>();
+
+	@OneToMany(mappedBy = "fabricante")
+	private List<AST_MarcaVO> marcas = new ArrayList<>();
 
 	public Integer getRequestID() {
 		return requestID;
@@ -61,28 +72,12 @@ public class AST_FabricanteVO implements Serializable {
 		this.dataDeCriacao = dataDeCriacao;
 	}
 
-	public String getCriadoPor() {
+	public FND_PessoaVO getCriadoPor() {
 		return criadoPor;
 	}
 
-	public void setCriadoPor(String criadoPor) {
+	public void setCriadoPor(FND_PessoaVO criadoPor) {
 		this.criadoPor = criadoPor;
-	}
-
-	public AST_MarcaVO getMarca() {
-		return marca;
-	}
-
-	public void setMarca(AST_MarcaVO marca) {
-		this.marca = marca;
-	}
-
-	public AST_ModeloVO getModelo() {
-		return modelo;
-	}
-
-	public void setModelo(AST_ModeloVO modelo) {
-		this.modelo = modelo;
 	}
 
 	public List<AST_EquipamentoVO> getEquipamentos() {
@@ -93,12 +88,27 @@ public class AST_FabricanteVO implements Serializable {
 		this.equipamentos = equipamentos;
 	}
 
+	public List<AST_ModeloVO> getModelos() {
+		return modelos;
+	}
+
+	public void setModelos(List<AST_ModeloVO> modelos) {
+		this.modelos = modelos;
+	}
+
+	public List<AST_MarcaVO> getMarcas() {
+		return marcas;
+	}
+
+	public void setMarcas(List<AST_MarcaVO> marcas) {
+		this.marcas = marcas;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result
-				+ ((requestID == null) ? 0 : requestID.hashCode());
+		result = prime * result + ((requestID == null) ? 0 : requestID.hashCode());
 		return result;
 	}
 

@@ -2,56 +2,78 @@ package com.clubee.modelo.ativos;
 
 import java.io.Serializable;
 
+import javax.persistence.Column;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.clubee.modelo.fundacoes.FND_Area;
+
 @Entity
-@Table(name="AST_Equipamentos")
+@Table(name = "AST_Equipamentos")
 public class AST_EquipamentoVO implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-	
+
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer requestID;
-	
+
+	@Column(length = 180)
 	private String nome;
-	
-	//private FND_StatusVO status;
-	
+
+	@Enumerated(EnumType.STRING)
+	@Column(length = 30)
+	private StatusEquipamento status;
+
+	@Column(length = 180)
 	private String codigoEquipamento;
-	
+
 	@ManyToOne
+	@JoinColumn(name = "categoria_id")
 	private AST_CategoriaEquipamentoVO categoria;
-	
+
 	@ManyToOne
+	@JoinColumn(name = "tipo_id")
 	private AST_TipoEquipamentoVO tipo;
-	
-	private AST_MarcaVO marca;
-	private AST_ModeloVO modelo;
-	
+
 	@ManyToOne
+	@JoinColumn(name = "marca_id")
+	private AST_MarcaVO marca;
+
+	@ManyToOne
+	@JoinColumn(name = "modelo_id")
+	private AST_ModeloVO modelo;
+
+	@ManyToOne
+	@JoinColumn(name = "area_id")
+	private FND_Area area;
+
+	@ManyToOne
+	@JoinColumn(name = "fabricante_id")
 	private AST_FabricanteVO fabricante;
-	
-	private String empresa;
-	
-	private Long numeroDeSerie;
-	
+
+	@Column(length = 180)
+	private String numeroDeSerie;
+
 	@Lob
 	private byte[] imagem;
-	
+
 	@Embedded
-	private AST_DadosDataEquipamento dadosDeDatas = new AST_DadosDataEquipamento();
-	
-	private Integer peridiocidadeQuantidade;
-	private Integer peridiocidadeParametro;
-	
+	private DadosDataEquipamento dadosDeDatas = new DadosDataEquipamento();
+
+	private Integer periodicidadeQuantidade;
+
+	@Column(length = 180)
+	private String periodicidadeParametro;
 
 	public Integer getRequestID() {
 		return requestID;
@@ -69,6 +91,13 @@ public class AST_EquipamentoVO implements Serializable {
 		this.nome = nome;
 	}
 
+	public StatusEquipamento getStatus() {
+		return status;
+	}
+
+	public void setStatus(StatusEquipamento status) {
+		this.status = status;
+	}
 
 	public String getCodigoEquipamento() {
 		return codigoEquipamento;
@@ -118,11 +147,11 @@ public class AST_EquipamentoVO implements Serializable {
 		this.fabricante = fabricante;
 	}
 
-	public Long getNumeroDeSerie() {
+	public String getNumeroDeSerie() {
 		return numeroDeSerie;
 	}
 
-	public void setNumeroDeSerie(Long numeroDeSerie) {
+	public void setNumeroDeSerie(String numeroDeSerie) {
 		this.numeroDeSerie = numeroDeSerie;
 	}
 
@@ -134,44 +163,43 @@ public class AST_EquipamentoVO implements Serializable {
 		this.imagem = imagem;
 	}
 
-	public AST_DadosDataEquipamento getDadosDeDatas() {
+	public DadosDataEquipamento getDadosDeDatas() {
 		return dadosDeDatas;
 	}
 
-	public void setDadosDeDatas(AST_DadosDataEquipamento dadosDeDatas) {
+	public void setDadosDeDatas(DadosDataEquipamento dadosDeDatas) {
 		this.dadosDeDatas = dadosDeDatas;
 	}
-	
-	public String getEmpresa() {
-		return empresa;
+
+	public Integer getPeriodicidadeQuantidade() {
+		return periodicidadeQuantidade;
 	}
 
-	public void setEmpresa(String empresa) {
-		this.empresa = empresa;
+	public void setPeriodicidadeQuantidade(Integer periodicidadeQuantidade) {
+		this.periodicidadeQuantidade = periodicidadeQuantidade;
 	}
 
-	public Integer getPeridiocidadeQuantidade() {
-		return peridiocidadeQuantidade;
+	public String getPeriodicidadeParametro() {
+		return periodicidadeParametro;
 	}
 
-	public void setPeridiocidadeQuantidade(Integer peridiocidadeQuantidade) {
-		this.peridiocidadeQuantidade = peridiocidadeQuantidade;
+	public void setPeriodicidadeParametro(String periodicidadeParametro) {
+		this.periodicidadeParametro = periodicidadeParametro;
 	}
 
-	public Integer getPeridiocidadeParametro() {
-		return peridiocidadeParametro;
+	public FND_Area getArea() {
+		return area;
 	}
 
-	public void setPeridiocidadeParametro(Integer peridiocidadeParametro) {
-		this.peridiocidadeParametro = peridiocidadeParametro;
+	public void setArea(FND_Area area) {
+		this.area = area;
 	}
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result
-				+ ((requestID == null) ? 0 : requestID.hashCode());
+		result = prime * result + ((requestID == null) ? 0 : requestID.hashCode());
 		return result;
 	}
 

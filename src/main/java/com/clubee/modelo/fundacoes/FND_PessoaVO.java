@@ -17,10 +17,14 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+
+import com.clubee.modelo.manutencoes.MNT_OcorrenciaVO;
+import com.clubee.modelo.manutencoes.MNT_TarefaVO;
 
 @Entity
 @Table(name = "FND_Pessoas")
@@ -31,16 +35,16 @@ public class FND_PessoaVO implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer requestID;
-	
+
 	@Column(name = "nome_completo", length = 100)
 	private String nomeCompleto;
-	
+
 	@Column(length = 80)
 	private String telefone;
-	
+
 	@Column(length = 14)
 	private String cpf;
-	
+
 	@Column(length = 10)
 	private String rg;
 
@@ -49,10 +53,10 @@ public class FND_PessoaVO implements Serializable {
 
 	@Embedded
 	private Endereco endereco;
-	
+
 	@Column(length = 80, unique = true)
 	private String email;
-	
+
 	@Column(length = 150)
 	private String password;
 
@@ -63,7 +67,7 @@ public class FND_PessoaVO implements Serializable {
 	@Temporal(TemporalType.DATE)
 	@Column(name = "data_de_nascimento", length = 12)
 	private Date dataDeNascimento;
-	
+
 	@Column(length = 40)
 	private String nacionalidade;
 
@@ -74,7 +78,7 @@ public class FND_PessoaVO implements Serializable {
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "data_de_cadastro", length = 25)
 	private Date dataDeCadastro;
-	
+
 	@Column(length = 80)
 	private String matricula;
 
@@ -85,11 +89,16 @@ public class FND_PessoaVO implements Serializable {
 	@OneToOne
 	@JoinColumn(name = "perfil_id")
 	private FND_PerfilVO perfil;
-	
+
 	@ManyToMany
-	@JoinTable(name = "relacao_pessoa_area",joinColumns = @JoinColumn(name = "pessoa_id"),
-			inverseJoinColumns = @JoinColumn(name = "area_id"))
+	@JoinTable(name = "relacao_pessoa_area", joinColumns = @JoinColumn(name = "pessoa_id") , inverseJoinColumns = @JoinColumn(name = "area_id") )
 	private List<FND_Area> areas = new ArrayList<>();
+
+	@OneToMany(mappedBy = "solicitante")
+	private List<MNT_OcorrenciaVO> ocorrencias = new ArrayList<>();
+
+	@OneToMany(mappedBy = "abertoPor")
+	private List<MNT_TarefaVO> tarefas = new ArrayList<>();
 
 	public Integer getRequestID() {
 		return requestID;
@@ -226,13 +235,29 @@ public class FND_PessoaVO implements Serializable {
 	public void setPerfil(FND_PerfilVO perfil) {
 		this.perfil = perfil;
 	}
-	
+
 	public List<FND_Area> getAreas() {
 		return areas;
 	}
 
 	public void setAreas(List<FND_Area> areas) {
 		this.areas = areas;
+	}
+
+	public List<MNT_OcorrenciaVO> getOcorrencias() {
+		return ocorrencias;
+	}
+
+	public void setOcorrencias(List<MNT_OcorrenciaVO> ocorrencias) {
+		this.ocorrencias = ocorrencias;
+	}
+
+	public List<MNT_TarefaVO> getTarefas() {
+		return tarefas;
+	}
+
+	public void setTarefas(List<MNT_TarefaVO> tarefas) {
+		this.tarefas = tarefas;
 	}
 
 	@Override

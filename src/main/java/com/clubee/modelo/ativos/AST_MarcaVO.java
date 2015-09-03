@@ -1,29 +1,42 @@
 package com.clubee.modelo.ativos;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="AST_Marca")
+@Table(name = "AST_Marca")
 public class AST_MarcaVO implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-	
+
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer requestID;
-	
+
+	@Column(length = 180)
 	private String nome;
-	
+
+	@ManyToOne
+	@JoinColumn(name = "fabricante_id")
 	private AST_FabricanteVO fabricante;
-	
-	//private AST_ModeloVO modelo;
-	
+
+	@OneToMany(mappedBy = "marca")
+	private List<AST_ModeloVO> modelos = new ArrayList<>();
+
+	@OneToMany(mappedBy = "marca")
+	private List<AST_EquipamentoVO> equipamentos = new ArrayList<>();
+
 	public Integer getRequestID() {
 		return requestID;
 	}
@@ -48,12 +61,27 @@ public class AST_MarcaVO implements Serializable {
 		this.fabricante = fabricante;
 	}
 
+	public List<AST_ModeloVO> getModelos() {
+		return modelos;
+	}
+
+	public void setModelos(List<AST_ModeloVO> modelos) {
+		this.modelos = modelos;
+	}
+
+	public List<AST_EquipamentoVO> getEquipamentos() {
+		return equipamentos;
+	}
+
+	public void setEquipamentos(List<AST_EquipamentoVO> equipamentos) {
+		this.equipamentos = equipamentos;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result
-				+ ((requestID == null) ? 0 : requestID.hashCode());
+		result = prime * result + ((requestID == null) ? 0 : requestID.hashCode());
 		return result;
 	}
 

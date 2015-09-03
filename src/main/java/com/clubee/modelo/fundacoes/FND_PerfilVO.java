@@ -1,6 +1,8 @@
 package com.clubee.modelo.fundacoes;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -8,11 +10,14 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import com.clubee.modelo.sistema.SYS_Modulo;
+
 @Entity
-@Table(name="FND_Perfil")
+@Table(name = "FND_Perfil")
 public class FND_PerfilVO implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -23,9 +28,12 @@ public class FND_PerfilVO implements Serializable {
 
 	@OneToOne(mappedBy = "perfil")
 	private FND_PessoaVO pessoa;
-	
+
 	@Enumerated(EnumType.STRING)
 	private StatusPerfil status;
+
+	@ManyToMany(mappedBy = "perfis")
+	private List<SYS_Modulo> modulos = new ArrayList<>();
 
 	public Integer getRequestID() {
 		return requestID;
@@ -41,6 +49,22 @@ public class FND_PerfilVO implements Serializable {
 
 	public void setPessoa(FND_PessoaVO pessoa) {
 		this.pessoa = pessoa;
+	}
+
+	public StatusPerfil getStatus() {
+		return status;
+	}
+
+	public void setStatus(StatusPerfil status) {
+		this.status = status;
+	}
+
+	public List<SYS_Modulo> getModulos() {
+		return modulos;
+	}
+
+	public void setModulos(List<SYS_Modulo> modulos) {
+		this.modulos = modulos;
 	}
 
 	@Override
