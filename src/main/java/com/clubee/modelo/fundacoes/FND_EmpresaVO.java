@@ -58,13 +58,13 @@ public class FND_EmpresaVO implements Serializable {
 
 	@ManyToMany
 	@JoinTable(name = "relacao_empresa_area", joinColumns = @JoinColumn(name = "empresa_id") , inverseJoinColumns = @JoinColumn(name = "area_id") )
-	private List<FND_Area> areas = new ArrayList<>();
+	private List<FND_AreaVO> areas = new ArrayList<>();
 
 	@OneToMany(mappedBy = "empresa")
 	private List<MNT_OcorrenciaVO> ocorrencias = new ArrayList<>();
 
 	@OneToMany(mappedBy = "empresa")
-	private List<FND_Designacao> designacoes = new ArrayList<>();
+	private List<FND_DesignacaoVO> designacoes = new ArrayList<>();
 
 	public Integer getRequestID() {
 		return requestID;
@@ -146,11 +146,11 @@ public class FND_EmpresaVO implements Serializable {
 		this.categoriasOperacionais = categoriasOperacionais;
 	}
 
-	public List<FND_Area> getAreas() {
+	public List<FND_AreaVO> getAreas() {
 		return areas;
 	}
 
-	public void setAreas(List<FND_Area> areas) {
+	public void setAreas(List<FND_AreaVO> areas) {
 		this.areas = areas;
 	}
 
@@ -162,11 +162,11 @@ public class FND_EmpresaVO implements Serializable {
 		this.ocorrencias = ocorrencias;
 	}
 
-	public List<FND_Designacao> getDesignacoes() {
+	public List<FND_DesignacaoVO> getDesignacoes() {
 		return designacoes;
 	}
 
-	public void setDesignacoes(List<FND_Designacao> designacoes) {
+	public void setDesignacoes(List<FND_DesignacaoVO> designacoes) {
 		this.designacoes = designacoes;
 	}
 

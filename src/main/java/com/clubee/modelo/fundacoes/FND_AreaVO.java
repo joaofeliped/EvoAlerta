@@ -18,7 +18,7 @@ import com.clubee.modelo.manutencoes.MNT_TarefaVO;
 
 @Entity
 @Table(name = "FND_Areas")
-public class FND_Area implements Serializable {
+public class FND_AreaVO implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
@@ -42,7 +42,7 @@ public class FND_Area implements Serializable {
 	private List<MNT_TarefaVO> tarefas = new ArrayList<>();
 
 	@OneToMany(mappedBy = "area")
-	private List<FND_Designacao> designacoes = new ArrayList<>();
+	private List<FND_DesignacaoVO> designacoes = new ArrayList<>();
 
 	public Integer getRequestID() {
 		return requestID;
@@ -92,11 +92,11 @@ public class FND_Area implements Serializable {
 		this.tarefas = tarefas;
 	}
 
-	public List<FND_Designacao> getDesignacoes() {
+	public List<FND_DesignacaoVO> getDesignacoes() {
 		return designacoes;
 	}
 
-	public void setDesignacoes(List<FND_Designacao> designacoes) {
+	public void setDesignacoes(List<FND_DesignacaoVO> designacoes) {
 		this.designacoes = designacoes;
 	}
 
@@ -116,7 +116,7 @@ public class FND_Area implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		FND_Area other = (FND_Area) obj;
+		FND_AreaVO other = (FND_AreaVO) obj;
 		if (requestID == null) {
 			if (other.requestID != null)
 				return false;

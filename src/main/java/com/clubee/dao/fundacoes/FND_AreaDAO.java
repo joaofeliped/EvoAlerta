@@ -1,4 +1,4 @@
-package com.clubee.dao.ativos;
+package com.clubee.dao.fundacoes;
 
 import java.io.Serializable;
 import java.util.List;

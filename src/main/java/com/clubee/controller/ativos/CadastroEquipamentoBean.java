@@ -2,9 +2,9 @@ package com.clubee.controller.ativos;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
-import javax.faces.event.ValueChangeEvent;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -14,6 +14,7 @@ import com.clubee.dao.ativos.AST_EquipamentoDAO;
 import com.clubee.modelo.ativos.AST_CategoriaEquipamentoVO;
 import com.clubee.modelo.ativos.AST_EquipamentoVO;
 import com.clubee.modelo.ativos.AST_TipoEquipamentoVO;
+import com.clubee.modelo.ativos.StatusEquipamento;
 
 @Named
 @ViewScoped
@@ -39,18 +40,18 @@ public class CadastroEquipamentoBean implements Serializable {
 		return categoriaEquipamentoDAO.buscarTodasCategoriasEquipamento();
 	}
 	
-	public void handleChange(ValueChangeEvent event){  
-	    System.out.println("New value: " + event.getNewValue());
-	}
-		
 	public void popularTipos() {
 		AST_CategoriaEquipamentoVO categoria = equipamentoVO.getCategoria();
+		
+		tipos.clear();
 		
 		if(categoria != null) {
 			tipos = categoriaEquipamentoDAO.buscarTiposPorCategoria(categoria);
 		}
-		
-		System.out.println(categoria);
+	}
+	
+	public List<StatusEquipamento> getStatusEquipamento() {
+		return Arrays.asList(StatusEquipamento.values());
 	}
 
 	public AST_EquipamentoVO getEquipamentoVO() {

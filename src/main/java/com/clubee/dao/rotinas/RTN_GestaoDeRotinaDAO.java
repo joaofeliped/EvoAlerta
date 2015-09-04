@@ -21,6 +21,11 @@ public class RTN_GestaoDeRotinaDAO implements Serializable{
 		
 	}
 	
+	@Transactional
+	public void inserirRotinaVO(RTN_GestaoDeRotinaVO rotina ){
+		manager.merge(rotina);
+	}
+	
 	public RTN_GestaoDeRotinaVO porAtividade(String Atividade){
 		return manager.createQuery("select gr from RTN_GestaoDeRotinaVO gr where gr.nome_atividade like :Atividade", RTN_GestaoDeRotinaVO.class)
 								.setParameter(Atividade,"%"+ Atividade+"%").getSingleResult();
@@ -31,13 +36,6 @@ public class RTN_GestaoDeRotinaDAO implements Serializable{
 								.setParameter(NomeAtivo, "%"+NomeAtivo+"%").getSingleResult();
 	}
 
-	
-	@Transactional
-	public void inserirRotinaVO(RTN_GestaoDeRotinaVO rotina ){
-		manager.merge(rotina);
-	}
-	
-	
 	public List<RTN_GestaoDeRotinaVO> buscarTodasRotinas(){
 		return manager.createQuery("from RTN_GestaoDeRotinaVO", RTN_GestaoDeRotinaVO.class).getResultList();
 	}

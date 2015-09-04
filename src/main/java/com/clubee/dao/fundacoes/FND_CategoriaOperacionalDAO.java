@@ -26,7 +26,7 @@ public class FND_CategoriaOperacionalDAO implements Serializable {
 	}
 	
 	public List<FND_CategoriaOperacionalVO> buscasTodasCategoriasOperacionais() {
-		return manager.createQuery("from FND_CatOperacional", FND_CategoriaOperacionalVO.class).getResultList();
+		return manager.createQuery("from FND_CategoriaOperacionalVO", FND_CategoriaOperacionalVO.class).getResultList();
 	}
 }
 

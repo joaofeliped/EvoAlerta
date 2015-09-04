@@ -18,7 +18,7 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
-import com.clubee.modelo.fundacoes.FND_Designacao;
+import com.clubee.modelo.fundacoes.FND_DesignacaoVO;
 import com.clubee.modelo.fundacoes.FND_PessoaVO;
 
 @Entity
@@ -46,7 +46,7 @@ public class RTN_RotinaVO implements Serializable {
 
 	@ManyToOne
 	@JoinColumn(name = "designacao_id")
-	private FND_Designacao designacao;
+	private FND_DesignacaoVO designacao;
 
 	@OneToMany(mappedBy = "rotina")
 	private List<RTN_GestaoDeRotinaVO> gestoesDeRotinas = new ArrayList<>();
@@ -91,11 +91,11 @@ public class RTN_RotinaVO implements Serializable {
 		this.dataCriacao = dataCriacao;
 	}
 
-	public FND_Designacao getDesignacao() {
+	public FND_DesignacaoVO getDesignacao() {
 		return designacao;
 	}
 
-	public void setDesignacao(FND_Designacao designacao) {
+	public void setDesignacao(FND_DesignacaoVO designacao) {
 		this.designacao = designacao;
 	}
 

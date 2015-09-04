@@ -27,13 +27,16 @@ public class AST_CategoriaEquipamentoDAO implements Serializable {
 	}
 	
 	public List<AST_CategoriaEquipamentoVO> buscarTodasCategoriasEquipamento() {
-		return manager.createQuery("from AST_CategoriaEquipamentoVO", AST_CategoriaEquipamentoVO.class).getResultList();
+		return manager.createQuery("from AST_CategoriaEquipamentoVO", AST_CategoriaEquipamentoVO.class)
+				.getResultList();
 	}
 	
 	public List<AST_TipoEquipamentoVO> buscarTiposPorCategoria(AST_CategoriaEquipamentoVO categoria) {
 		categoria = porID(categoria.getRequestID());
 		
-		return categoria.getTiposEquipamentos();
+		return manager.createQuery("select t from AST_TipoEquipamentoVO t where t.categoriaEquipamento = :categoria", AST_TipoEquipamentoVO.class)
+				.setParameter("categoria", categoria)
+				.getResultList();
 	}
 
 }
