@@ -16,3 +16,6 @@ insert into AST_Tipo_Equipamento (nome, categoria_id) values ('Banheiro', 2);
 insert into AST_Tipo_Equipamento (nome, categoria_id) values ('Escritorio', 2);
 insert into AST_Tipo_Equipamento (nome, categoria_id) values ('Area de musculacao', 2);
 
+insert into AST_Tipo_Equipamento (nome, categoria_id) values ('Computador', 3);
+insert into AST_Tipo_Equipamento (nome, categoria_id) values ('Caixa de som', 3);
+
