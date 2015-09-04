@@ -18,7 +18,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-import com.clubee.modelo.fundacoes.FND_Area;
+import com.clubee.modelo.fundacoes.FND_AreaVO;
 import com.clubee.modelo.manutencoes.MNT_OcorrenciaVO;
 import com.clubee.modelo.rotinas.RTN_GestaoDeRotinaVO;
 import com.clubee.modelo.sistema.SYS_Anexo;
@@ -60,7 +60,7 @@ public class AST_EquipamentoVO implements Serializable {
 
 	@ManyToOne
 	@JoinColumn(name = "area_id")
-	private FND_Area area;
+	private FND_AreaVO area;
 
 	@ManyToOne
 	@JoinColumn(name = "fabricante_id")
@@ -200,11 +200,11 @@ public class AST_EquipamentoVO implements Serializable {
 		this.periodicidadeParametro = periodicidadeParametro;
 	}
 
-	public FND_Area getArea() {
+	public FND_AreaVO getArea() {
 		return area;
 	}
 
-	public void setArea(FND_Area area) {
+	public void setArea(FND_AreaVO area) {
 		this.area = area;
 	}
 

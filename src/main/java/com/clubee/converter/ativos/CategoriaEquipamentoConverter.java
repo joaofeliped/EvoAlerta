@@ -15,6 +15,7 @@ public class CategoriaEquipamentoConverter implements Converter {
 	@Inject
 	private AST_CategoriaEquipamentoDAO categoriaEquipamentoDAO;
 	
+	
 	@Override
 	public Object getAsObject(FacesContext context, UIComponent component, String value) {
 		
@@ -39,7 +40,7 @@ public class CategoriaEquipamentoConverter implements Converter {
 			return codigo.toString();
 		}
 		
-		return null;
+		return "";
 	}
 
 }

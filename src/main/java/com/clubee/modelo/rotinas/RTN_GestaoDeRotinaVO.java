@@ -15,7 +15,7 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 import com.clubee.modelo.ativos.AST_EquipamentoVO;
-import com.clubee.modelo.fundacoes.FND_Area;
+import com.clubee.modelo.fundacoes.FND_AreaVO;
 import com.clubee.modelo.fundacoes.FND_PessoaVO;
 import com.clubee.modelo.manutencoes.MNT_OcorrenciaVO;
 
@@ -37,7 +37,7 @@ public class RTN_GestaoDeRotinaVO implements Serializable {
 
 	@ManyToOne
 	@JoinColumn(name = "area_responsavel_id")
-	private FND_Area areaResponsavel;
+	private FND_AreaVO areaResponsavel;
 
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date dataCriacao;
@@ -98,11 +98,11 @@ public class RTN_GestaoDeRotinaVO implements Serializable {
 		this.descricao = descricao;
 	}
 
-	public FND_Area getAreaResponsavel() {
+	public FND_AreaVO getAreaResponsavel() {
 		return areaResponsavel;
 	}
 
-	public void setAreaResponsavel(FND_Area areaResponsavel) {
+	public void setAreaResponsavel(FND_AreaVO areaResponsavel) {
 		this.areaResponsavel = areaResponsavel;
 	}
 

@@ -19,7 +19,7 @@ public class FND_CategoriaOperacionalVO implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int requestID;
+	private Integer requestID;
 
 	@Column(name = "categoria_1", length = 180)
 	private String categoria1;
@@ -34,11 +34,11 @@ public class FND_CategoriaOperacionalVO implements Serializable {
 	@JoinColumn(name = "empresa_id")
 	private FND_EmpresaVO empresa;
 
-	public int getRequestID() {
+	public Integer getRequestID() {
 		return requestID;
 	}
 
-	public void setRequestID(int requestID) {
+	public void setRequestID(Integer requestID) {
 		this.requestID = requestID;
 	}
 

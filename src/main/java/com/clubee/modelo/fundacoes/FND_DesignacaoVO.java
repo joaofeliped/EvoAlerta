@@ -18,7 +18,7 @@ import com.clubee.modelo.rotinas.RTN_RotinaVO;
 
 @Entity
 @Table(name = "FND_Designacoes")
-public class FND_Designacao implements Serializable {
+public class FND_DesignacaoVO implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
@@ -47,7 +47,7 @@ public class FND_Designacao implements Serializable {
 
 	@ManyToOne
 	@JoinColumn(name = "area")
-	private FND_Area area;
+	private FND_AreaVO area;
 
 	@OneToMany(mappedBy = "designacao")
 	private List<RTN_RotinaVO> rotinas = new ArrayList<>();
@@ -108,11 +108,11 @@ public class FND_Designacao implements Serializable {
 		this.empresa = empresa;
 	}
 
-	public FND_Area getArea() {
+	public FND_AreaVO getArea() {
 		return area;
 	}
 
-	public void setArea(FND_Area area) {
+	public void setArea(FND_AreaVO area) {
 		this.area = area;
 	}
 
@@ -140,7 +140,7 @@ public class FND_Designacao implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		FND_Designacao other = (FND_Designacao) obj;
+		FND_DesignacaoVO other = (FND_DesignacaoVO) obj;
 		if (requestID == null) {
 			if (other.requestID != null)
 				return false;

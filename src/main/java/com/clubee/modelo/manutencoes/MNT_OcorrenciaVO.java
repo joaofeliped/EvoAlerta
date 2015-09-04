@@ -21,7 +21,7 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 import com.clubee.modelo.ativos.AST_EquipamentoVO;
-import com.clubee.modelo.fundacoes.FND_Area;
+import com.clubee.modelo.fundacoes.FND_AreaVO;
 import com.clubee.modelo.fundacoes.FND_EmpresaVO;
 import com.clubee.modelo.fundacoes.FND_PessoaVO;
 import com.clubee.modelo.rotinas.RTN_GestaoDeRotinaVO;
@@ -62,7 +62,7 @@ public class MNT_OcorrenciaVO implements Serializable {
 
 	@ManyToOne
 	@JoinColumn(name = "area_designada_id")
-	private FND_Area areaDesignada;
+	private FND_AreaVO areaDesignada;
 
 	@ManyToOne
 	@JoinColumn(name = "atendido_por")
@@ -177,11 +177,11 @@ public class MNT_OcorrenciaVO implements Serializable {
 		this.empresa = empresa;
 	}
 
-	public FND_Area getAreaDesignada() {
+	public FND_AreaVO getAreaDesignada() {
 		return areaDesignada;
 	}
 
-	public void setAreaDesignada(FND_Area areaDesignada) {
+	public void setAreaDesignada(FND_AreaVO areaDesignada) {
 		this.areaDesignada = areaDesignada;
 	}
 

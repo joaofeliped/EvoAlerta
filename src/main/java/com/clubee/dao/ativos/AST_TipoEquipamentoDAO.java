@@ -26,7 +26,8 @@ public class AST_TipoEquipamentoDAO implements Serializable {
 	}
 	
 	public List<AST_TipoEquipamentoVO> buscarTodosTiposEquipamentos() {
-		return manager.createQuery("from AST_TipoEquipamentoVO", AST_TipoEquipamentoVO.class).getResultList();
+		return manager.createQuery("from AST_TipoEquipamentoVO", AST_TipoEquipamentoVO.class)
+				.getResultList();
 	}
 	
 

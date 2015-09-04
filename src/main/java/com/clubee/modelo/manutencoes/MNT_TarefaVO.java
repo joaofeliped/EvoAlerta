@@ -16,7 +16,7 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
-import com.clubee.modelo.fundacoes.FND_Area;
+import com.clubee.modelo.fundacoes.FND_AreaVO;
 import com.clubee.modelo.fundacoes.FND_PessoaVO;
 
 @Entity
@@ -56,7 +56,7 @@ public class MNT_TarefaVO implements Serializable {
 
 	@ManyToOne
 	@JoinColumn(name = "area_designada")
-	private FND_Area areaDesignada;
+	private FND_AreaVO areaDesignada;
 
 	@ManyToOne
 	@JoinColumn(name = "ocorrencia")
@@ -129,11 +129,11 @@ public class MNT_TarefaVO implements Serializable {
 		this.abertoPor = abertoPor;
 	}
 
-	public FND_Area getAreaDesignada() {
+	public FND_AreaVO getAreaDesignada() {
 		return areaDesignada;
 	}
 
-	public void setAreaDesignada(FND_Area areaDesignada) {
+	public void setAreaDesignada(FND_AreaVO areaDesignada) {
 		this.areaDesignada = areaDesignada;
 	}
 

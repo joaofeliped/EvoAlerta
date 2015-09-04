@@ -94,7 +94,7 @@ public class FND_PessoaVO implements Serializable {
 
 	@ManyToMany
 	@JoinTable(name = "relacao_pessoa_area", joinColumns = @JoinColumn(name = "pessoa_id") , inverseJoinColumns = @JoinColumn(name = "area_id") )
-	private List<FND_Area> areas = new ArrayList<>();
+	private List<FND_AreaVO> areas = new ArrayList<>();
 
 	@OneToMany(mappedBy = "solicitante")
 	private List<MNT_OcorrenciaVO> ocorrencias = new ArrayList<>();
@@ -244,11 +244,11 @@ public class FND_PessoaVO implements Serializable {
 		this.perfil = perfil;
 	}
 
-	public List<FND_Area> getAreas() {
+	public List<FND_AreaVO> getAreas() {
 		return areas;
 	}
 
-	public void setAreas(List<FND_Area> areas) {
+	public void setAreas(List<FND_AreaVO> areas) {
 		this.areas = areas;
 	}
 
