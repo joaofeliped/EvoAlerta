@@ -75,7 +75,7 @@ public class AST_EquipamentoVO implements Serializable {
 	private SYS_Anexo anexo;
 
 	@Embedded
-	private DadosDataEquipamento dadosDeDatas = new DadosDataEquipamento();
+	private DadosDataEquipamento dadosDeDatas;
 
 	@Column(name = "periodicidade_quantidade")
 	private Integer periodicidadeQuantidade;

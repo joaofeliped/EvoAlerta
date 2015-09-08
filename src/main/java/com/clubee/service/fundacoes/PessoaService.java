@@ -1,6 +1,7 @@
 package com.clubee.service.fundacoes;
 
 import java.io.Serializable;
+import java.util.Date;
 
 import javax.inject.Inject;
 
@@ -17,6 +18,8 @@ public class PessoaService implements Serializable {
 	
 	@Transactional
 	public void salvar(FND_PessoaVO pessoa) {
+		pessoa.setDataDeCadastro(new Date());
+		
 		pessoaDAO.inserirPessoaVO(pessoa);
 	}
 }

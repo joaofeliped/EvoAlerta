@@ -13,6 +13,7 @@ import com.clubee.dao.ativos.AST_CategoriaEquipamentoDAO;
 import com.clubee.modelo.ativos.AST_CategoriaEquipamentoVO;
 import com.clubee.modelo.ativos.AST_EquipamentoVO;
 import com.clubee.modelo.ativos.AST_TipoEquipamentoVO;
+import com.clubee.modelo.ativos.DadosDataEquipamento;
 import com.clubee.modelo.ativos.StatusEquipamento;
 import com.clubee.service.ativos.EquipamentoService;
 
@@ -34,6 +35,8 @@ public class CadastroEquipamentoBean implements Serializable {
 	
 	public CadastroEquipamentoBean() {
 		equipamento = new AST_EquipamentoVO();
+		equipamento.setDadosDeDatas(new DadosDataEquipamento());
+		
 		tipos = new ArrayList<>();
 	}
 	

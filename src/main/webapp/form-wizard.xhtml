@@ -50,8 +50,13 @@
 		rel="stylesheet" type="text/css"></link>
 	<link href="assets/css/custom.css" rel="stylesheet" type="text/css"></link>
 
-	<script src="assets/plugins/3d-bold-navigation/js/modernizr.js"></script>
-	<script src="assets/plugins/offcanvasmenueffects/js/snap.svg-min.js"></script>
+	<script src="assets/plugins/3d-bold-navigation/js/modernizr.js">
+		var $a = jQuery.noConflict();
+	</script>
+	<script src="assets/plugins/offcanvasmenueffects/js/snap.svg-min.js">
+		var $a = jQuery.noConflict();
+	</script>
+
 
 	<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
 	<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -61,6 +66,9 @@
         <![endif]-->
 
 	<h:outputScript library="js" name="locale_pt.js" />
+	<h:outputScript name="jquery/jquery.js" library="primefaces" />
+
+	<h:outputStylesheet library="css" name="sistema.css" />
 </h:head>
 <h:body class="page-header-fixed">
 	<div class="overlay"></div>
@@ -646,77 +654,76 @@
 													<div class="row">
 														<div class="form-group col-md-6">
 															<label for="categoria">Categoria</label> <br /> <br />
-															<h:selectOneMenu id="categoria" value="#{cadastroEquipamentoVOBean.equipamentoVO.categoria}" styleClass="form-control">
+															<h:selectOneMenu id="categoria"
+																value="#{cadastroEquipamentoBean.equipamento.categoria}"
+																styleClass="form-control">
+																<p:ajax event="click" process="@this" 
+																	listener="#{cadastroEquipamentoBean.popularTipos}"
+																	update="tipoEquipamento" />
 																<f:selectItem itemLabel="Selecione"
 																	noSelectionOption="true" />
-																<f:selectItems value="#{cadastroEquipamentoVOBean.categorias}" var="categoria"
-																	itemLabel="#{categoria.nome}" itemValue="#{categoria}"/>
-																<p:ajax event="change" process="categoria" listener="#{cadastroEquipamentoVOBean.popularTipos}"
-																 update="tipoEquipamento"/>	
+																<f:selectItems
+																	value="#{cadastroEquipamentoBean.categorias}"
+																	var="categoria" itemLabel="#{categoria.nome}"
+																	itemValue="#{categoria}" />
+																
 															</h:selectOneMenu>
-														</div>
-														<div class="form-group  col-md-6">
-															<label for="tipoEquipamento">Tipo de
-																equipamento</label> <br /> <br />
-															<h:selectOneMenu id="tipoEquipamento" styleClass="form-control">
+															<!-- Parte AJAX para carregar o tipo de equipamento -->
+															<br /> <br />
+															
+															<label for="tipoEquipamento">Tipo de equipamento</label>
+															<br /> <br />
+															<h:selectOneMenu id="tipoEquipamento"
+																value="#{cadastroEquipamentoBean.equipamento.tipo}"
+																styleClass="form-control">
 																<f:selectItem itemLabel="Selecione"
 																	noSelectionOption="true" />
-																<f:selectItems value="#{cadastroEquipamentoVOBean.tipos}" var="tipo"
-																	itemLabel="#{tipo.nome}" itemValue="#{tipo}"/>
+																<f:selectItems value="#{cadastroEquipamentoBean.tipos}"
+																	var="tipo" itemLabel="#{tipo.nome}" itemValue="#{tipo}" />
 															</h:selectOneMenu>
+															<br/><br/>
+															
 														</div>
-
 													</div>
 												</div>
 											</div>
 										</div>
 										<div class="tab-pane fade" id="tab2">
 											<div class="row">
-												<div class="col-md-3">
-													<img src="assets/images/envato-logo.png" width="250" alt=""></img>
-													<div class="m-t-md">
-														<address>
-															<strong>Twitter, Inc.</strong><br></br> 795 Folsom Ave,
-															Suite 600<br></br> San Francisco, CA 94107<br></br> <abbr
-																title="Phone">P:</abbr> (123) 456-7890
-														</address>
-														<address>
-															<strong>Full Name</strong><br></br> <a href="mailto:#">first.last@example.com</a>
-														</address>
-													</div>
-												</div>
-												<div class="col-md-9">
+												<div class="col-md-9" style="margin-left: 150px">
 													<div class="form-group col-md-12">
 														<label for="statusPessoa">Status</label>
-														<h:selectOneMenu id="statusPessoa"
+														<h:selectOneMenu id="statusPessoa" value="#{cadastroEquipamentoBean.equipamento.status}"
 															styleClass="form-control">
 															<f:selectItem itemLabel="Selecione"
 																noSelectionOption="true" />
-															<f:selectItem itemLabel="Em evento" itemValue="ev" />
-															<f:selectItem itemLabel="Em funcionamento" itemValue="f" />
-															<f:selectItem itemLabel="Em manutenção" itemValue="m" />
-															<f:selectItem itemLabel="Vendido" itemValue="v" />
+															<f:selectItems value="#{cadastroEquipamentoBean.statusEquipamento}" var="status"
+																itemLabel="#{status.descricao}" itemValue="#{status}"/>
 														</h:selectOneMenu>
 													</div>
 													<div class="form-group col-md-12">
 														<label for="nomeEquipamento">Nome do equipamento</label>
 														<h:inputText id="nomeEquipamento"
+															value="#{cadastroEquipamentoBean.equipamento.nome}"
 															styleClass="form-control" pt:placeholder="Nome" />
 													</div>
 													<div class="form-group col-md-12">
 														<label for="numeroSerie">Número de série</label>
 														<h:inputText id="numeroSerie" styleClass="form-control"
+															value="#{cadastroEquipamentoBean.equipamento.numeroDeSerie}"
 															pt:placeholder="Número" />
 													</div>
 													<div class="form-group col-md-12">
 														<label for="marca">Marca</label>
 														<h:inputText id="marca" styleClass="form-control"
+															value="#{cadastroEquipamentoBean.equipamento.marca}"
 															pt:placeholder="Marca" />
 													</div>
 													<div class="form-group col-md-12">
 														<label for="modelo">Modelo</label>
-														<h:inputText id="modelo" styleClass="form-control"
-															pt:placeholder="Modelo" />
+														<h:inputText id="modelo"
+															value="#{cadastroEquipamentoBean.equipamento.modelo}"
+															styleClass="form-control" pt:placeholder="Modelo" />
 													</div>
 													<div class="form-group col-md-12">
 														<label for="unidade">Unidade</label>
@@ -727,6 +734,7 @@
 															<f:selectItem itemLabel="Filial 1" itemValue="f" />
 															<f:selectItem itemLabel="Filial 2" itemValue="m" />
 														</h:selectOneMenu>
+
 													</div>
 													<div class="form-group col-md-12">
 														<label for="valor">Valor de compra</label>
@@ -735,19 +743,18 @@
 													</div>
 													<div class="form-group col-md-12">
 														<label for="dataCompra">Data da compra</label>
-														<p:inputMask id="dataCompra" styleClass="form-control"
-															mask="99/99/9999" />
+														<p:calendar id="dataCompra" mask="99/99/9999" locale="pt"
+															pattern="dd/MM/yyyy" />
 													</div>
 													<div class="form-group col-md-12">
 														<label for="dataInstalacao">Data da instalação</label>
-														<p:calendar id="dataInstalacao" styleClass="form-control"
-															locale="pt" pattern="dd/MM/yyyy" />
+														<p:calendar id="dataInstalacao" locale="pt"
+															mask="99/99/9999" pattern="dd/MM/yyyy" pages="3"/>
 													</div>
 													<div class="form-group col-md-12">
 														<label for="dataGarantia">Garantia até</label>
-														<p:calendar id="dataGarantia" pages="3"
-															styleClass="form-control" locale="pt"
-															pattern="dd/MM/yyyy" />
+														<p:calendar id="dataGarantia" mask="99/99/9999"
+															locale="pt" pattern="dd/MM/yyyy" pages="3"/>
 													</div>
 													<div class="form-group col-md-12">
 														<label for="tagsId">Tags</label>
@@ -788,8 +795,8 @@
 													<div class="form-group col-md-12">
 														<label for="proximaManutencao">Data da próxima
 															manutenção</label>
-														<p:inputMask id="proximaManutencao"
-															styleClass="form-control" mask="99/99/9999" />
+														<p:calendar id="proximaManutencao" mask="99/99/9999"
+															locale="pt" pattern="dd/MM/yyyy" pages="3"/>
 													</div>
 												</div>
 											</div>
@@ -813,19 +820,18 @@
 														<h3 class="panel-title">Plupload</h3>
 													</div>
 												</div>
-												</div>
 											</div>
-											<div class="tab-pane fade" id="tab5">
-												<h2 class="no-s">Obrigado!</h2>
-												<div class="alert alert-info m-t-sm m-b-lg" role="alert">
-													Equipamento salvo com sucesso.</div>
-											</div>
-											<ul class="pager wizard">
-												<li class="previous"><a href="#"
-													class="btn btn-default">Previous</a></li>
-												<li class="next"><a href="#" class="btn btn-default">Next</a></li>
-											</ul>
 										</div>
+										<div class="tab-pane fade" id="tab5">
+											<h2 class="no-s">Obrigado!</h2>
+											<div class="alert alert-info m-t-sm m-b-lg" role="alert">
+												Equipamento salvo com sucesso.</div>
+										</div>
+										<ul class="pager wizard">
+											<li class="previous"><a href="#" class="btn btn-default">Previous</a></li>
+											<li class="next"><a href="#" class="btn btn-default">Next</a></li>
+										</ul>
+									</div>
 								</h:form>
 							</div>
 						</div>
@@ -884,25 +890,50 @@
 
 
 	<!-- Javascripts -->
-	<script src="assets/plugins/jquery/jquery-2.1.4.min.js"></script>
-	<script src="assets/plugins/jquery-ui/jquery-ui.min.js"></script>
-	<script src="assets/plugins/pace-master/pace.min.js"></script>
-	<script src="assets/plugins/jquery-blockui/jquery.blockui.js"></script>
-	<script src="assets/plugins/bootstrap/js/bootstrap.min.js"></script>
-	<script src="assets/plugins/jquery-slimscroll/jquery.slimscroll.min.js"></script>
-	<script src="assets/plugins/switchery/switchery.min.js"></script>
-	<script src="assets/plugins/uniform/jquery.uniform.min.js"></script>
-	<script src="assets/plugins/offcanvasmenueffects/js/classie.js"></script>
-	<script src="assets/plugins/offcanvasmenueffects/js/main.js"></script>
-	<script src="assets/plugins/waves/waves.min.js"></script>
-	<script src="assets/plugins/3d-bold-navigation/js/main.js"></script>
+	<!-- <script src="assets/plugins/jquery/jquery-2.1.4.min.js"></script> -->
+	<!-- <script src="assets/plugins/pace-master/pace.min.js"></script> -->
+	<script src="assets/plugins/jquery-blockui/jquery.blockui.js">
+		var $a = jQuery.noConflict();
+	</script>
+	<script src="assets/plugins/bootstrap/js/bootstrap.min.js">
+		var $a = jQuery.noConflict();
+	</script>
+	<script src="assets/plugins/jquery-slimscroll/jquery.slimscroll.min.js">
+		var $a = jQuery.noConflict();
+	</script>
+	<script src="assets/plugins/switchery/switchery.min.js">
+		var $a = jQuery.noConflict();
+	</script>
+	<script src="assets/plugins/uniform/jquery.uniform.min.js">
+		var $a = jQuery.noConflict();
+	</script>
+	<script src="assets/plugins/offcanvasmenueffects/js/classie.js">
+		var $a = jQuery.noConflict();
+	</script>
+	<script src="assets/plugins/offcanvasmenueffects/js/main.js">
+		var $a = jQuery.noConflict();
+	</script>
+	<script src="assets/plugins/waves/waves.min.js">
+		var $a = jQuery.noConflict();
+	</script>
+	<script src="assets/plugins/3d-bold-navigation/js/main.js">
+		var $a = jQuery.noConflict();
+	</script>
 	<script
-		src="assets/plugins/twitter-bootstrap-wizard/jquery.bootstrap.wizard.min.js"></script>
-	<script src="assets/plugins/jquery-validation/jquery.validate.min.js"></script>
-	<script
-		src="assets/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
-	<script src="assets/js/modern.min.js"></script>
-	<script src="assets/js/pages/form-wizard.js"></script>
+		src="assets/plugins/twitter-bootstrap-wizard/jquery.bootstrap.wizard.min.js">
+		var $a = jQuery.noConflict();
+	</script>
+	<script src="assets/plugins/jquery-validation/jquery.validate.min.js">
+		var $a = jQuery.noConflict();
+	</script>
+	<!-- <script
+		src="assets/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>-->
+	<script src="assets/js/modern.min.js">
+		var $a = jQuery.noConflict();
+	</script>
+	<script src="assets/js/pages/form-wizard.js">
+		var $a = jQuery.noConflict();
+	</script>
 
 </h:body>
 </html>

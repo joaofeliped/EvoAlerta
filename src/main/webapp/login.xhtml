@@ -46,6 +46,8 @@
 
 <script src="assets/plugins/3d-bold-navigation/js/modernizr.js"></script>
 <script src="assets/plugins/offcanvasmenueffects/js/snap.svg-min.js"></script>
+
+<h:outputStylesheet library="css" name="sistema.css"/>
 </h:head>
 
 <h:body class="page-login">
@@ -59,12 +61,14 @@
 								Alerta</a>
 							<p class="text-center m-t-md">Acesse sua conta.</p>
 							<h:form class="m-t-md" action="index.xhtml">
-							<p:messages autoUpdate="true"/>
+							<p:messages autoUpdate="true" />
 								<div class="form-group">
-									<p:inputText class="form-control" value="#{loginUsuarioBean.emailLogin}" pt:placeholder="E-mail"/>
+									<p:inputText id="email" class="form-control" value="#{loginUsuarioBean.emailLogin}" label="E-mail" 
+									requiredMessage="Insira seu e-mail"	pt:placeholder="E-mail" required="true"/>
 								</div>
 								<div class="form-group">
-									<p:password class="form-control" value="#{loginUsuarioBean.senha}" pt:placeholder="Senha"/>
+									<p:password id="senha" class="form-control" value="#{loginUsuarioBean.senha}" label="Senha"
+									 requiredMessage="Insira sua senha" pt:placeholder="Senha" required="true"/>
 								</div>
 								<p:commandButton class="btn btn-success btn-block" value="Login" action="#{loginUsuarioBean.login}"/>
 								<a href="forgot.html"
