@@ -1,6 +1,7 @@
 package com.clubee.modelo.ativos;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -81,6 +82,9 @@ public class AST_EquipamentoVO implements Serializable {
 
 	@Column(name = "periodicidade_parametro", length = 180)
 	private String periodicidadeParametro;
+
+	@Column(name = "valor_de_compra", precision = 10, scale = 2)
+	private BigDecimal valorDeCompra;
 
 	@OneToMany(mappedBy = "equipamento")
 	private List<MNT_OcorrenciaVO> ocorrencias = new ArrayList<>();
@@ -198,6 +202,14 @@ public class AST_EquipamentoVO implements Serializable {
 
 	public void setPeriodicidadeParametro(String periodicidadeParametro) {
 		this.periodicidadeParametro = periodicidadeParametro;
+	}
+
+	public BigDecimal getValorDeCompra() {
+		return valorDeCompra;
+	}
+
+	public void setValorDeCompra(BigDecimal valorDeCompra) {
+		this.valorDeCompra = valorDeCompra;
 	}
 
 	public FND_AreaVO getArea() {
