@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<meta charset="UTF-8" />
+	<title>Cadastro Pessoa</title>
+
+	<h:outputScript library="js" name="locale_pt.js" />
+
+</h:head>
+<h:body>
+
+	<h1>Cadastro de Pessoa</h1>
+
+	<h:form id="frm">
+		<p:messages id="msg" closable="true" />
+
+		<p:panelGrid columns="2" style="width: 100%">
+			<p:outputLabel for="nome" value="Nome completo" />
+			<h:inputText id="nome"
+				value="#{cadastroPessoaBean.pessoa.nomeCompleto}" />
+
+			<p:outputLabel for="email" value="E-mail" />
+			<h:inputText id="email" value="#{cadastroPessoaBean.pessoa.email}" />
+
+			<p:outputLabel for="telefone" value="Telefone" />
+			<p:inputMask id="telefone" mask="(99)9999-9999"
+				value="#{cadastroPessoaBean.pessoa.telefone}" />
+
+			<p:outputLabel for="cpf" value="CPF" />
+			<p:inputMask id="cpf" mask="999.999.999-99"
+				value="#{cadastroPessoaBean.pessoa.cpf}" />
+
+			<p:outputLabel for="rg" value="RG" />
+			<p:inputMask id="rg" mask="9999999"
+				value="#{cadastroPessoaBean.pessoa.rg}" />
+
+			<p:outputLabel for="pais" value="País" />
+			<h:inputText id="pais"
+				value="#{cadastroPessoaBean.pessoa.localizacao.pais}" />
+
+			<p:outputLabel for="cidade" value="Cidade" />
+			<h:inputText id="cidade"
+				value="#{cadastroPessoaBean.pessoa.localizacao.cidade}" />
+
+			<p:outputLabel for="regiao" value="Região" />
+			<h:inputText id="regiao"
+				value="#{cadastroPessoaBean.pessoa.localizacao.regiao}" />
+
+			<p:outputLabel for="cep" value="CEP" />
+			<p:inputMask id="cep" mask="99.999-999"
+				value="#{cadastroPessoaBean.pessoa.endereco.cep}" />
+
+			<p:outputLabel for="logradouro" value="Logradouro" />
+			<h:inputText id="logradouro"
+				value="#{cadastroPessoaBean.pessoa.endereco.logradouro}" />
+
+			<p:outputLabel for="complemento1" value="Complemento 1" />
+			<h:inputText id="complemento1"
+				value="#{cadastroPessoaBean.pessoa.endereco.complemento1}" />
+
+			<p:outputLabel for="complemento2" value="Complemento 2" />
+			<h:inputText id="complemento2"
+				value="#{cadastroPessoaBean.pessoa.endereco.complemento2}" />
+
+			<p:outputLabel for="bairro" value="Bairro" />
+			<h:inputText id="bairro"
+				value="#{cadastroPessoaBean.pessoa.endereco.bairro}" />
+
+			<p:outputLabel for="sexo" value="Sexo" />
+			<p:selectOneRadio id="sexo" value="#{cadastroPessoaBean.pessoa.sexo}">
+				<f:selectItems value="#{cadastroPessoaBean.sexo}" var="sexo"
+					itemLabel="#{sexo.descricao}" itemValue="#{sexo}" />
+			</p:selectOneRadio>
+
+			<p:outputLabel for="dataNascimento" value="Data de Nascimento" />
+			<p:calendar id="dataNascimento"
+				value="#{cadastroPessoaBean.pessoa.dataDeNascimento}"
+				pattern="dd/MM/yyyy" mask="99/99/9999" locale="pt" />
+
+			<p:outputLabel for="nacionalidade" value="Nacionalidade" />
+			<h:inputText id="nacionalidade"
+				value="#{cadastroPessoaBean.pessoa.nacionalidade}" />
+
+			<p:outputLabel for="tipoPessoa" value="Tipo" />
+			<p:selectOneMenu id="tipoPessoa"
+				value="#{cadastroPessoaBean.pessoa.tipoPessoa}">
+				<p:ajax event="click" process="@this" update="empresa" />
+				<f:selectItem itemLabel="Selecione" noSelectionOption="true" />
+				<f:selectItems value="#{cadastroPessoaBean.tipoPessoa}" var="tipo"
+					itemLabel="#{tipo.descricao}" itemValue="#{tipo}" />
+			</p:selectOneMenu>
+
+			<p:outputLabel for="empresa" value="Empresa"
+				 />
+			<p:selectOneMenu id="empresa"
+				value="#{cadastroPessoaBean.pessoa.empresa}"
+				>
+				<f:selectItem itemLabel="Selecione" noSelectionOption="true" />
+				<f:selectItems value="#{cadastroPessoaBean.empresas}" var="empresa"
+					itemLabel="#{empresa.nomeEmpresa}" itemValue="#{empresa}" />
+			</p:selectOneMenu>
+
+			<p:outputLabel />
+			<p:commandButton value="Salvar" action="#{cadastroPessoaBean.salvar}"
+				update="msg" />
+		</p:panelGrid>
+
+	</h:form>
+</h:body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
