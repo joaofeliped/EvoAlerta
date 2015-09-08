@@ -63,9 +63,6 @@ public class FND_EmpresaVO implements Serializable {
 	@OneToMany(mappedBy = "empresa")
 	private List<MNT_OcorrenciaVO> ocorrencias = new ArrayList<>();
 
-	@OneToMany(mappedBy = "empresa")
-	private List<FND_DesignacaoVO> designacoes = new ArrayList<>();
-
 	public Integer getRequestID() {
 		return requestID;
 	}
@@ -160,14 +157,6 @@ public class FND_EmpresaVO implements Serializable {
 
 	public void setOcorrencias(List<MNT_OcorrenciaVO> ocorrencias) {
 		this.ocorrencias = ocorrencias;
-	}
-
-	public List<FND_DesignacaoVO> getDesignacoes() {
-		return designacoes;
-	}
-
-	public void setDesignacoes(List<FND_DesignacaoVO> designacoes) {
-		this.designacoes = designacoes;
 	}
 
 	@Override

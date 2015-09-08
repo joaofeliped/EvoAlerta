@@ -3,7 +3,8 @@ package com.clubee.modelo.manutencoes;
 public enum StatusTarefa {
 	
 	ABERTO("Aberto"),
-	CONCLUIDO("Concluído");
+	CONCLUIDO("Concluído"),
+	ATRASADO("Atrasado");
 	
 	private String descricao;
 	

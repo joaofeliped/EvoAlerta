@@ -7,7 +7,6 @@ import javax.inject.Inject;
 import javax.persistence.EntityManager;
 
 import com.clubee.modelo.fundacoes.FND_TipoEmpresaVO;
-import com.clubee.util.jpa.Transactional;
 
 public class FND_TipoEmpresaDAO implements Serializable {
 
@@ -20,7 +19,6 @@ public class FND_TipoEmpresaDAO implements Serializable {
 		return manager.find(FND_TipoEmpresaVO.class, id);
 	}
 	
-	@Transactional
 	public void inserirTipoEmpresa(FND_TipoEmpresaVO tipoEmpresa) {
 		manager.merge(tipoEmpresa);
 	}

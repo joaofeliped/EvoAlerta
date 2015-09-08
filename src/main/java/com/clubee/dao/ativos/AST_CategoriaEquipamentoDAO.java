@@ -8,7 +8,6 @@ import javax.persistence.EntityManager;
 
 import com.clubee.modelo.ativos.AST_CategoriaEquipamentoVO;
 import com.clubee.modelo.ativos.AST_TipoEquipamentoVO;
-import com.clubee.util.jpa.Transactional;
 
 public class AST_CategoriaEquipamentoDAO implements Serializable {
 
@@ -21,7 +20,6 @@ public class AST_CategoriaEquipamentoDAO implements Serializable {
 		return manager.find(AST_CategoriaEquipamentoVO.class, id);
 	}
 	
-	@Transactional
 	public void inserirCategoriaEquipamento(AST_CategoriaEquipamentoVO categoriaEquipamento) {
 		manager.merge(categoriaEquipamento);
 	}

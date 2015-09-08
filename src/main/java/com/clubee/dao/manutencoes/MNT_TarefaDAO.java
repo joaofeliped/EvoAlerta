@@ -7,7 +7,6 @@ import javax.inject.Inject;
 import javax.persistence.EntityManager;
 
 import com.clubee.modelo.manutencoes.MNT_TarefaVO;
-import com.clubee.util.jpa.Transactional;
 
 public class MNT_TarefaDAO implements Serializable {
 
@@ -20,7 +19,6 @@ public class MNT_TarefaDAO implements Serializable {
 		return manager.find(MNT_TarefaVO.class, id);
 	}
 	
-	@Transactional
 	public void inserirTarefa(MNT_TarefaVO tarefa) {
 		manager.merge(tarefa);
 	}

@@ -7,7 +7,6 @@ import javax.inject.Inject;
 import javax.persistence.EntityManager;
 
 import com.clubee.modelo.fundacoes.FND_CategoriaOperacionalVO;
-import com.clubee.util.jpa.Transactional;
 
 public class FND_CategoriaOperacionalDAO implements Serializable {
 	
@@ -20,7 +19,6 @@ public class FND_CategoriaOperacionalDAO implements Serializable {
 		return manager.find(FND_CategoriaOperacionalVO.class, id);
 	}
 	
-	@Transactional
 	public void inserirCatOperacionalVO(FND_CategoriaOperacionalVO categoriaOperacional) {
 		manager.merge(categoriaOperacional);
 	}

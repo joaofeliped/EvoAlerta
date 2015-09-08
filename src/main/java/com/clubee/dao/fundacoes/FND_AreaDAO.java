@@ -7,7 +7,6 @@ import javax.inject.Inject;
 import javax.persistence.EntityManager;
 
 import com.clubee.modelo.fundacoes.FND_AreaVO;
-import com.clubee.util.jpa.Transactional;
 
 public class FND_AreaDAO implements Serializable {
 
@@ -20,7 +19,6 @@ public class FND_AreaDAO implements Serializable {
 		return manager.find(FND_AreaVO.class, id);
 	}
 	
-	@Transactional
 	public void inserirArea(FND_AreaVO area) {
 		manager.merge(area);
 	}
