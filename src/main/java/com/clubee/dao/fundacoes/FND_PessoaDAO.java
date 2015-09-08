@@ -8,7 +8,6 @@ import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 
 import com.clubee.modelo.fundacoes.FND_PessoaVO;
-import com.clubee.util.jpa.Transactional;
 
 public class FND_PessoaDAO implements Serializable {
 	
@@ -31,7 +30,6 @@ public class FND_PessoaDAO implements Serializable {
 		}
 	}
 	
-	@Transactional
 	public void inserirPessoaVO(FND_PessoaVO pessoa) {
 		manager.merge(pessoa);
 	}

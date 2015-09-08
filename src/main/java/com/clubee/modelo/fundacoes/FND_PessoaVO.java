@@ -26,7 +26,6 @@ import javax.persistence.TemporalType;
 import com.clubee.modelo.manutencoes.MNT_OcorrenciaVO;
 import com.clubee.modelo.manutencoes.MNT_TarefaVO;
 import com.clubee.modelo.rotinas.RTN_GestaoDeRotinaVO;
-import com.clubee.modelo.rotinas.RTN_RotinaVO;
 
 @Entity
 @Table(name = "FND_Pessoas")
@@ -101,9 +100,6 @@ public class FND_PessoaVO implements Serializable {
 
 	@OneToMany(mappedBy = "abertoPor")
 	private List<MNT_TarefaVO> tarefas = new ArrayList<>();
-
-	@OneToMany(mappedBy = "criadoPor")
-	private List<RTN_RotinaVO> rotinas = new ArrayList<>();
 
 	@OneToMany(mappedBy = "criadoPor")
 	private List<RTN_GestaoDeRotinaVO> gestoesDeRotinas = new ArrayList<>();
@@ -266,14 +262,6 @@ public class FND_PessoaVO implements Serializable {
 
 	public void setTarefas(List<MNT_TarefaVO> tarefas) {
 		this.tarefas = tarefas;
-	}
-
-	public List<RTN_RotinaVO> getRotinas() {
-		return rotinas;
-	}
-
-	public void setRotinas(List<RTN_RotinaVO> rotinas) {
-		this.rotinas = rotinas;
 	}
 
 	public List<RTN_GestaoDeRotinaVO> getGestoesDeRotinas() {

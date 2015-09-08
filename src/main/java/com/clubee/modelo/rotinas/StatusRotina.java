@@ -6,8 +6,7 @@ public enum StatusRotina {
 	CONCLUIDO("Concluído"), 
 	ATRASADO("Atrasado"),
 	EM_ESPERA("Em espera"),
-	EM_ANDAMENTO("Em andamento"),
-	FECHADO("fechado");
+	EM_ANDAMENTO("Em andamento");
 	
 	private String descricao;
 	

@@ -40,7 +40,7 @@ public class MarcaConverter implements Converter {
 		}
 		
 		
-		return null;
+		return "";
 	}
 
 }

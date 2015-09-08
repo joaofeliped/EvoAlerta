@@ -7,7 +7,6 @@ import javax.inject.Inject;
 import javax.persistence.EntityManager;
 
 import com.clubee.modelo.ativos.AST_MarcaVO;
-import com.clubee.util.jpa.Transactional;
 
 public class AST_MarcaDAO implements Serializable {
 
@@ -20,7 +19,6 @@ public class AST_MarcaDAO implements Serializable {
 		return manager.find(AST_MarcaVO.class, id);
 	}
 	
-	@Transactional
 	public void inserirMarcar(AST_MarcaVO marca) {
 		manager.merge(marca);
 	}

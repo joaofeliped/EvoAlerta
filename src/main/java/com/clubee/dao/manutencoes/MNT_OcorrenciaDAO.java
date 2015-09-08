@@ -7,7 +7,6 @@ import javax.inject.Inject;
 import javax.persistence.EntityManager;
 
 import com.clubee.modelo.manutencoes.MNT_OcorrenciaVO;
-import com.clubee.util.jpa.Transactional;
 
 public class MNT_OcorrenciaDAO implements Serializable {
 
@@ -20,7 +19,6 @@ public class MNT_OcorrenciaDAO implements Serializable {
 		return manager.find(MNT_OcorrenciaVO.class, id);
 	}
 	
-	@Transactional
 	public void inserirOcorrencia(MNT_OcorrenciaVO ocorrencia) {
 		manager.merge(ocorrencia);
 	}

@@ -5,6 +5,8 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -67,12 +69,15 @@ public class RTN_GestaoDeRotinaVO implements Serializable {
 	private FND_PessoaVO criadoPor;
 
 	@ManyToOne
-	@JoinColumn(name = "rotina_id")
-	private RTN_RotinaVO rotina;
-
-	@ManyToOne
 	@JoinColumn(name = "ocorrencia_id")
 	private MNT_OcorrenciaVO ocorrencia;
+
+	@Enumerated(EnumType.STRING)
+	@Column(name = "tipo_de_rotina")
+	private TipoRotina tipoRotina;
+
+	@Enumerated(EnumType.STRING)
+	private StatusRotina status;
 
 	public Integer getRequestID() {
 		return requestID;
@@ -170,20 +175,28 @@ public class RTN_GestaoDeRotinaVO implements Serializable {
 		this.criadoPor = criadoPor;
 	}
 
-	public RTN_RotinaVO getRotina() {
-		return rotina;
-	}
-
-	public void setRotina(RTN_RotinaVO rotina) {
-		this.rotina = rotina;
-	}
-
 	public MNT_OcorrenciaVO getOcorrencia() {
 		return ocorrencia;
 	}
 
 	public void setOcorrencia(MNT_OcorrenciaVO ocorrencia) {
 		this.ocorrencia = ocorrencia;
+	}
+
+	public TipoRotina getTipoRotina() {
+		return tipoRotina;
+	}
+
+	public void setTipoRotina(TipoRotina tipoRotina) {
+		this.tipoRotina = tipoRotina;
+	}
+
+	public StatusRotina getStatus() {
+		return status;
+	}
+
+	public void setStatus(StatusRotina status) {
+		this.status = status;
 	}
 
 	@Override

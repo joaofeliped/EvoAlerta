@@ -7,7 +7,6 @@ import javax.inject.Inject;
 import javax.persistence.EntityManager;
 
 import com.clubee.modelo.rotinas.RTN_GestaoDeRotinaVO;
-import com.clubee.util.jpa.Transactional;
 
 public class RTN_GestaoDeRotinaDAO implements Serializable{
 	
@@ -21,9 +20,8 @@ public class RTN_GestaoDeRotinaDAO implements Serializable{
 		
 	}
 	
-	@Transactional
-	public void inserirRotinaVO(RTN_GestaoDeRotinaVO rotina ){
-		manager.merge(rotina);
+	public void inserirGestaoDeRotinaVO(RTN_GestaoDeRotinaVO gestaoDeRotina){
+		manager.merge(gestaoDeRotina);
 	}
 	
 	public RTN_GestaoDeRotinaVO porAtividade(String Atividade){

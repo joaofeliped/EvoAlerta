@@ -10,11 +10,11 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 import com.clubee.dao.ativos.AST_CategoriaEquipamentoDAO;
-import com.clubee.dao.ativos.AST_EquipamentoDAO;
 import com.clubee.modelo.ativos.AST_CategoriaEquipamentoVO;
 import com.clubee.modelo.ativos.AST_EquipamentoVO;
 import com.clubee.modelo.ativos.AST_TipoEquipamentoVO;
 import com.clubee.modelo.ativos.StatusEquipamento;
+import com.clubee.service.ativos.EquipamentoService;
 
 @Named
 @ViewScoped
@@ -23,17 +23,22 @@ public class CadastroEquipamentoBean implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	@Inject
-	private AST_EquipamentoDAO equipamentoDAO;
+	private EquipamentoService equipamentoService;
 	
 	@Inject
 	private AST_CategoriaEquipamentoDAO categoriaEquipamentoDAO;
 	
-	private AST_EquipamentoVO equipamentoVO = new AST_EquipamentoVO();
+	private AST_EquipamentoVO equipamento;
 	
-	private List<AST_TipoEquipamentoVO> tipos = new ArrayList<>();
+	private List<AST_TipoEquipamentoVO> tipos;
+	
+	public CadastroEquipamentoBean() {
+		equipamento = new AST_EquipamentoVO();
+		tipos = new ArrayList<>();
+	}
 	
 	public void salvar() {
-		equipamentoDAO.inserirEquipamentoVO(equipamentoVO);
+		equipamentoService.salvar(equipamento);
 	}
 	
 	public List<AST_CategoriaEquipamentoVO> getCategorias() {
@@ -41,7 +46,7 @@ public class CadastroEquipamentoBean implements Serializable {
 	}
 	
 	public void popularTipos() {
-		AST_CategoriaEquipamentoVO categoria = equipamentoVO.getCategoria();
+		AST_CategoriaEquipamentoVO categoria = equipamento.getCategoria();
 		
 		tipos.clear();
 		
@@ -54,15 +59,15 @@ public class CadastroEquipamentoBean implements Serializable {
 		return Arrays.asList(StatusEquipamento.values());
 	}
 
-	public AST_EquipamentoVO getEquipamentoVO() {
-		if(equipamentoVO == null) {
-			equipamentoVO = new AST_EquipamentoVO();
+	public AST_EquipamentoVO getEquipamento() {
+		if(equipamento == null) {
+			equipamento = new AST_EquipamentoVO();
 		}
-		return equipamentoVO;
+		return equipamento;
 	}
 
-	public void setEquipamentoVO(AST_EquipamentoVO equipamentoVO) {
-		this.equipamentoVO = equipamentoVO;
+	public void setEquipamento(AST_EquipamentoVO equipamento) {
+		this.equipamento = equipamento;
 	}
 	
 	public List<AST_TipoEquipamentoVO> getTipos() {

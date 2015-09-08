@@ -7,7 +7,6 @@ import javax.inject.Inject;
 import javax.persistence.EntityManager;
 
 import com.clubee.modelo.ativos.AST_ModeloVO;
-import com.clubee.util.jpa.Transactional;
 
 public class AST_ModeloDAO implements Serializable {
 
@@ -20,7 +19,6 @@ public class AST_ModeloDAO implements Serializable {
 		return manager.find(AST_ModeloVO.class, id);
 	}
 	
-	@Transactional
 	public void inserirModelo(AST_ModeloVO modelo) {
 		manager.merge(modelo);
 	}

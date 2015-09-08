@@ -7,7 +7,6 @@ import javax.inject.Inject;
 import javax.persistence.EntityManager;
 
 import com.clubee.modelo.ativos.AST_FabricanteVO;
-import com.clubee.util.jpa.Transactional;
 
 public class AST_FabricanteDAO implements Serializable {
 
@@ -20,7 +19,6 @@ public class AST_FabricanteDAO implements Serializable {
 		return manager.find(AST_FabricanteVO.class, id);
 	}
 	
-	@Transactional
 	public void inserirFabricante(AST_FabricanteVO fabricante) {
 		manager.merge(fabricante);
 	}
